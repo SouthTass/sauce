@@ -61,6 +61,15 @@ class EmptyData extends httpException {
   }
 }
 
+class ServiceError extends httpException {
+  constructor(message, code){
+    super()
+    this.message = message || '服务错误'
+    this.code = code || 400
+    this.status = 400
+  }
+}
+
 module.exports = {
   httpException,
   NotFound,
@@ -68,5 +77,6 @@ module.exports = {
   AuthFailed,
   Forbbiden,
   BusinessError,
-  EmptyData
+  EmptyData,
+  ServiceError
 }

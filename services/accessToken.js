@@ -18,7 +18,11 @@ class AccessTokenManager{
   }
 
   static async getTokenFromWx(){
-
+    const wxmp = global.config.wxmp
+    const url = util.format(wxmp.accessTokenUrl, wxmp.appid, wxmp.secret) 
+    let res = await axios.get(url)
+    if(res.status != 200) throw new global.customError.ServiceError()
+    return res.data
   }
 
   static async codeToToken(code){

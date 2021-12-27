@@ -6,7 +6,6 @@ const catchError = require('./middlewars/catchError')
 const app = new Koa()
 app.use(parser())
 app.use(catchError)
-process.cwd()
 InitManager.initCore(app)
 
 app.listen(3000)

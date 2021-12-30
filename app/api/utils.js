@@ -2,7 +2,6 @@ const Router = require('koa-router')
 const router = new Router({
   prefix: '/utils'
 })
-const path = require('path')
 
 router.post('/ticket/add', async (ctx, next) => {
   let body = ctx.request.body
@@ -18,10 +17,11 @@ router.post('/ticket/add', async (ctx, next) => {
       status: 1
     }
   }
-  let fileAddress = path.join('/usr/local/nodejs/projects/my-robot/config', 'code.js')
+  let fileAddress = '/usr/local/nodejs/projects/my-robot/config/code.js'
   const fs = require('fs')
   const buffer = fs.readFileSync(fileAddress)
   let text = String(buffer)
+  console.log(1, text)
   text = text.replace('module.exports =', '')
   text = JSON.parse(text)
   text.push({

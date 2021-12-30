@@ -21,15 +21,20 @@ router.post('/ticket/add', async (ctx, next) => {
   const fs = require('fs')
   const buffer = fs.readFileSync(fileAddress)
   let text = String(buffer)
+  console.log(1)
   text = text.replace('module.exports =', '')
+  console.log(2)
   text = JSON.parse(text)
+  console.log(3)
   text.push({
     name: body.name,
     content: body.code
   })
+  console.log(4)
   text = JSON.stringify(text)
+  console.log(5)
   text = 'module.exports = ' + text
-  console.log(123, text)
+  console.log(6)
   fs.writeFile(fileAddress, text, (err) => {
     if (err) throw err;
     console.log('The file has been saved!');

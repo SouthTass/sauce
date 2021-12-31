@@ -23,7 +23,7 @@ router.post('/ticket/add', async (ctx, next) => {
   let text = String(buffer)
   console.log(1)
   text = text.replace('module.exports =', '')
-  console.log(2, text)
+  console.log(2)
   text = JSON.parse(text)
   console.log(3)
   text.push({

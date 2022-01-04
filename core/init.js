@@ -25,6 +25,11 @@ class InitManager{
     requireDirectory(module, wxDirectory, {
       visit: whenLoadModule
     })
+
+    const stockDirectory = `${process.cwd()}/app/stock`
+    requireDirectory(module, stockDirectory, {
+      visit: whenLoadModule
+    })
     
     function whenLoadModule(obj){
       if(obj instanceof Router){

@@ -5,10 +5,15 @@ const axios = require('axios')
 
 class PerformanceForecast extends Model {
   static async getFirst(){
-    return await PerformanceForecast.findOne()
+    return await PerformanceForecast.findOne({
+      order: [
+        ['id', 'DESC']
+      ]
+    })
   }
 
   static async createItem(code, name, type, time, float, profit, content){
+    console.log(2, code, name, type, time, float, profit, content)
     return await PerformanceForecast.create({
       code, name, type, time, float, profit, content
     })

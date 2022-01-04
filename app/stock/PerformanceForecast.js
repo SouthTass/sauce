@@ -4,16 +4,13 @@ const router = new Router({
   prefix: '/stock'
 })
 
-router.post('/performance/forecast/:id', async (ctx, next) => {
+router.post('/performance/forecast/first', async (ctx, next) => {
   let id = ctx.params.id
-  let res
-  if(id == 'first'){
-    res = await PerformanceForecast.getFirst()
-    if(res){
-      ctx.body = {
-        code: res.code,
-        time: res.time
-      }
+  let res = await PerformanceForecast.getFirst()
+  if(res){
+    ctx.body = {
+      code: res.code,
+      time: res.time
     }
   }
 })

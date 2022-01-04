@@ -4,8 +4,7 @@ const router = new Router({
   prefix: '/stock'
 })
 
-router.post('/performance/forecast/first', async (ctx, next) => {
-  let id = ctx.params.id
+router.get('/performance/forecast/first', async (ctx, next) => {
   let res = await PerformanceForecast.getFirst()
   if(res){
     ctx.body = res

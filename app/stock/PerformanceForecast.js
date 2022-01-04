@@ -24,7 +24,7 @@ router.post('/performance/forecast/add', async (ctx, next) => {
   if(!body.float) throw new global.customError.ServiceError('公告变动幅度不能为空')
   if(!body.profit) throw new global.customError.ServiceError('同期净利润不能为空')
   if(!body.content) throw new global.customError.ServiceError('公告摘要不能为空')
-  let res = await PerformanceForecast.createItem('341243')
+  let res = await PerformanceForecast.createItem(...body)
   if(!res) throw new global.customError.ServiceError('程序错误')
   ctx.status = 200
   ctx.body = {

@@ -15,4 +15,11 @@ router.post('/group/record', async (ctx, next) => {
   }
 })
 
+router.get('/chat/num', async (ctx, next) => {
+  let res = await GroupWxRecord.getChatNum()
+  if(!res) throw new global.customError.ServiceError('暂无数据')
+  ctx.status = 200
+  ctx.body = res
+})
+
 module.exports = router

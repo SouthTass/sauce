@@ -7,6 +7,18 @@ class GroupWxRecord extends Model {
       room, from_name, content
     })
   }
+
+  static async getChatNum(){
+    let list = await GroupWxRecord.count({
+      where: {
+        room: '4000'
+      },
+      attributes: ['from_name'],
+      group: 'from_name'
+    })
+    if(!list) throw new global.customError.ServiceError('暂无记录')
+    return list
+  }
 }
 
 GroupWxRecord.init({

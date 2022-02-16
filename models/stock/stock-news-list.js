@@ -44,6 +44,21 @@ class StockNewsList extends Model {
       throw new global.customError.EmptyData()
     }
   }
+
+  static async updateItem(nid){
+    let res = await StockNewsList.update({
+      status: 1
+    },{
+      where: {
+        nid: nid,
+      }
+    })
+    if(res){
+      return res
+    }else{
+      throw new global.customError.EmptyData()
+    }
+  }
 }
 
 StockNewsList.init({

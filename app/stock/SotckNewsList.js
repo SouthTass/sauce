@@ -11,7 +11,7 @@ router.get('/newslist/findone', async (ctx, next) => {
 })
 
 // 查找数据库中有无该消息
-router.get('/newslist/findone', async (ctx, next) => {
+router.get('/newslist/lastitem', async (ctx, next) => {
   let res = await StockNewsList.getLastItem()
   if(res) ctx.body = res
 })
@@ -20,6 +20,13 @@ router.get('/newslist/findone', async (ctx, next) => {
 router.post('/newslist/add', async (ctx, next) => {
   let body = ctx.request.body
   let res = await StockNewsList.addList(body)
+  if(res) ctx.body = res
+})
+
+// 修改信息状态
+router.post('/newslist/update', async (ctx, next) => {
+  let body = ctx.request.body
+  let res = await StockNewsList.updateItem(body.nid)
   if(res) ctx.body = res
 })
 

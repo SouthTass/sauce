@@ -11,7 +11,7 @@ const sequelize = new SequeLize(dbname, user, pwd, {
   dialect: 'mysql',
   host,
   port,
-  logging: true,
+  logging: false,
   timezone: '+08:00',
   define: {
     paranoid: true,
@@ -21,9 +21,7 @@ const sequelize = new SequeLize(dbname, user, pwd, {
     deletedAt: 'deleted_at'
   }
 })
-
 sequelize.sync()
-
 module.exports = {
   sequelize
 }

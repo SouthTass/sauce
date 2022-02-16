@@ -16,11 +16,6 @@ class InitManager{
   }
 
   static initLoadRouters(){
-    const apiDirectory = `${process.cwd()}/app/api`
-    requireDirectory(module, apiDirectory, {
-      visit: whenLoadModule
-    })
-
     const wxDirectory = `${process.cwd()}/app/wx`
     requireDirectory(module, wxDirectory, {
       visit: whenLoadModule

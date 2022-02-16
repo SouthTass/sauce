@@ -10,7 +10,7 @@ router.get('/newslist/findone', async (ctx, next) => {
   if(res) ctx.body = res
 })
 
-// 查找数据库中有无该消息
+// 查找数据库中最新的一条没发送的消息
 router.get('/newslist/lastitem', async (ctx, next) => {
   let res = await StockNewsList.getLastItem()
   if(res) ctx.body = res

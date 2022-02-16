@@ -34,7 +34,6 @@ class StockNewsList extends Model {
   static async getLastItem(){
     let res = await StockNewsList.findOne({
       where: {
-        nid: nid,
         status: 0
       }
     })

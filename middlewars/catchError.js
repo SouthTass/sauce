@@ -5,12 +5,10 @@ const catchError = async (ctx, next) => {
   } catch (error) {
     if(error instanceof httpException){
       ctx.status = error.status
-      ctx.body = {
-        message: error.message,
-        code: error.code
-      }
+      ctx.body = error.message
     }else{
-      ctx.status = 500
+      ctx.status = 500,
+      ctx.body = '服务出错，请稍后重试'
     }
   }
 }

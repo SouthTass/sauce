@@ -30,10 +30,10 @@ class AccessTokenManager{
     const url = util.format(wx.loginUrl, wx.appId, wx.appSecret, code)
     const res = await axios.get(url)
     if(res.status !== 200){
-      throw new global.customError.AuthFailed('openid获取失败')
+      throw new global.customError.ServiceError('openid获取失败')
     }
     if(res.data.errcode){
-      throw new global.customError.AuthFailed(`openid获取失败：${res.data.errcode}--${res.data.errmsg}`)
+      throw new global.customError.ServiceError(`openid获取失败：${res.data.errcode}--${res.data.errmsg}`)
     }
     let user = await User.getUserByOpenid(res.data.openid)
     console.log(300, user)

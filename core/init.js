@@ -7,6 +7,7 @@ class InitManager{
     InitManager.initLoadRouters()
     InitManager.importGlobalError()
     InitManager.loadConfig()
+    InitManager.timedTask()
   }
 
   static loadConfig(path = ''){
@@ -36,6 +37,12 @@ class InitManager{
   static importGlobalError(){
     const errorFile = require('../core/httpException')
     global.customError = errorFile
+  }
+
+  static timedTask(){
+    const taskPath = `${process.cwd()}/script/task/index.js`
+    const task = require(taskPath)
+    task.init()
   }
 }
 

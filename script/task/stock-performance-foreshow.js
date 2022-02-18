@@ -35,10 +35,6 @@ performance.performanceForecast = async function performanceForecast(bot){
       axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', result[i])
     }
   }
-  // let first = await axios.get('http://sauce.coconer.cn/stock/performance/forecast/first');
-  // console.log(`业绩预告: ${dayjs().format('YYYY-MM-DD HH:mm:ss')} pcode: ${body.code} scode: ${first.data.code}`)
-  // let text = `【业绩预告 - ${body.name}】<br>${body.type}，上年同期：${body.profit}<br>${body.content}`;
-  // await axios.post('http://sauce.coconer.cn/stock/performance/forecast/add', body);
 }
 
 module.exports = performance

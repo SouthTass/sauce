@@ -4,14 +4,13 @@ let task = {}
 
 // 初始化任务
 task.init = function init(){
-  stockPerformanceForeshow.performanceForecast()
-  // setIntervalTaskTwoSecond()
+  setIntervalTaskTwoSecond()
 }
 
 // 每隔2秒去执行的定时任务
 async function setIntervalTaskTwoSecond(){
   setInterval(() => {
-    console.log(`当前时间：${dayjs().format('YYYY-MM-DD HH:mm:ss')}`)
+    stockPerformanceForeshow.performanceForecast()
   }, 5000);
 }
 

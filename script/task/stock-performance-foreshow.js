@@ -30,8 +30,7 @@ performance.performanceForecast = async function performanceForecast(bot){
   })
   for(let i = 0; i < result.length; i++){
     let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${result[i].code}&type=${result[i].type}`
-    console.log(url)
-    let res = await axios.get(encodeURIComponent(url))
+    let res = await axios.get(encodeURI(url))
     if(res.status == 204){
       axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', result[i])
     }

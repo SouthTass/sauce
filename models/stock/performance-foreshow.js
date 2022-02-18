@@ -12,11 +12,21 @@ class PerformanceForeshow extends Model {
   }
 
   static async getRecord(code, type){
-    console.log(code, type)
     let res = await PerformanceForeshow.findOne({
       where: {
         code, type
       }
+    })
+    if(res){
+      return res
+    }else{
+      throw new global.customError.EmptyData()
+    }
+  }
+
+  static async getRecordStatus(body){
+    let res = await PerformanceForeshow.findOne({
+      where: body
     })
     if(res){
       return res

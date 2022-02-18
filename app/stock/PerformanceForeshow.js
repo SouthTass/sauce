@@ -19,4 +19,10 @@ router.get('/find', async (ctx, next) => {
   if(res) ctx.body = res
 })
 
+// 查询指定的消息
+router.get('/status', async (ctx, next) => {
+  let res = await PerformanceForeshow.getRecordStatus({status: ctx.query.status})
+  if(res) ctx.body = res
+})
+
 module.exports = router

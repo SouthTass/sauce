@@ -7,7 +7,7 @@ class InitManager{
     InitManager.initLoadRouters()
     InitManager.importGlobalError()
     InitManager.loadConfig()
-    // InitManager.timedTask()
+    InitManager.timedTask()
   }
 
   static loadConfig(path = ''){

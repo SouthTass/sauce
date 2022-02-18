@@ -10,6 +10,15 @@ class IdleCapitalRecord extends Model {
       return `${error.name} - ${error.parent.sqlMessage}`
     }
   }
+
+  static async getBuyList(time){
+    let res = await IdleCapitalRecord.findAll({
+      where: {
+        time
+      }
+    })
+    return res || []
+  }
 }
 
 IdleCapitalRecord.init({

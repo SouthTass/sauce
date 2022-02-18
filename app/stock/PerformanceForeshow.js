@@ -25,4 +25,11 @@ router.get('/status', async (ctx, next) => {
   if(res) ctx.body = res
 })
 
+// 修改信息状态
+router.post('/update', async (ctx, next) => {
+  let body = ctx.request.body
+  let res = await StockNewsList.updateItem(body.code, body.type)
+  if(res) ctx.body = res
+})
+
 module.exports = router

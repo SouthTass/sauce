@@ -34,6 +34,21 @@ class PerformanceForeshow extends Model {
       throw new global.customError.EmptyData()
     }
   }
+
+  static async updateRecords(code, type){
+    let res = await PerformanceForeshow.update({
+      status: 1
+    },{
+      where: {
+        code, type
+      }
+    })
+    if(res){
+      return res
+    }else{
+      throw new global.customError.EmptyData()
+    }
+  }
 }
 PerformanceForeshow.init({
   id: {

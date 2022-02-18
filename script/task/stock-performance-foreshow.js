@@ -28,9 +28,14 @@ performance.performanceForecast = async function performanceForecast(bot){
     let tmpBody = JSON.parse(JSON.stringify(body))
     result.push({...tmpBody, status: 0})
   })
-  // for(let i = 0; i < result.length; i++){
-  //   let res = await 
-  // }
+  for(let i = 0; i < result.length; i++){
+    let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${result[i].code}&type=${result[i].type}`
+    console.log(url)
+    let res = await axios.get(encodeURIComponent(url))
+    if(res.status == 204){
+      axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', result[i])
+    }
+  }
   // let first = await axios.get('http://sauce.coconer.cn/stock/performance/forecast/first');
   // console.log(`业绩预告: ${dayjs().format('YYYY-MM-DD HH:mm:ss')} pcode: ${body.code} scode: ${first.data.code}`)
   // let text = `【业绩预告 - ${body.name}】<br>${body.type}，上年同期：${body.profit}<br>${body.content}`;

@@ -28,7 +28,7 @@ router.get('/status', async (ctx, next) => {
 // 修改信息状态
 router.post('/update', async (ctx, next) => {
   let body = ctx.request.body
-  let res = await PerformanceForeshow.updateItem(body.code, body.type)
+  let res = await PerformanceForeshow.updateRecords(body.code, body.type)
   if(res) ctx.body = res
 })
 

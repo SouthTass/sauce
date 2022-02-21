@@ -7,7 +7,7 @@ task.init = function init(){
   setIntervalTaskTwoSecond()
 }
 
-// 每隔2秒去执行的定时任务
+// 每隔5秒去执行的定时任务
 async function setIntervalTaskTwoSecond(){
   setInterval(() => {
     stockPerformanceForeshow.performanceForecast()

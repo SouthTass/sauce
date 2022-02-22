@@ -4,15 +4,22 @@ let task = {}
 
 // 初始化任务
 task.init = function init(){
-  setIntervalTaskTwoSecond()
+  setIntervalTaskFiveSecond()
+  setIntervalTaskTenSecond()
 }
 
 // 每隔5秒去执行的定时任务
-async function setIntervalTaskTwoSecond(){
+async function setIntervalTaskFiveSecond(){
   setInterval(() => {
     stockPerformanceForeshow.performanceForecast()
-    stockPerformanceForeshow.performanceForecast202201()
   }, 5000);
+}
+
+// 每隔10秒去执行的定时任务
+async function setIntervalTaskTenSecond(){
+  setInterval(() => {
+    stockPerformanceForeshow.performanceForecast202201()
+  }, 10000);
 }
 
 module.exports = task

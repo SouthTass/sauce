@@ -50,20 +50,21 @@ performance.performanceForecast202201 = async function (){
         'Accept-Language': 'zh-CN,zh;q=0.9',
         'Cache-Control': 'max-age=0',
         'Connection': 'keep-alive',
-        'Cookie': 'searchGuide=sg; Hm_lvt_f79b64788a4e377c608617fba4c736e2=1644918805,1645173346,1645430566; Hm_lvt_60bad21af9c824a4a0530d5dbf4357ca=1644918805,1645173346,1645430566; Hm_lvt_78c58f01938e4d85eaf619eae71b4ed1=1645080172,1645173329,1645174075,1645430566; log=; Hm_lpvt_78c58f01938e4d85eaf619eae71b4ed1=1645515717; Hm_lpvt_f79b64788a4e377c608617fba4c736e2=1645515717; Hm_lpvt_60bad21af9c824a4a0530d5dbf4357ca=1645515717; v=A-IClYN89ClcR-h1yr3NBbUvNWNBM-ZNmDfacSx7DtUA_4zdFMM2XWjHKoD_',
+        'Cookie': 'vvvv=1; v=A-jfrl3BHp92BjIb-QYXE4Otv93_EUwbLnUgn6IZNGNW_YbDSiEcq36F8C7x',
         'Host': 'data.10jqka.com.cn',
+        'Referer': 'https://data.10jqka.com.cn/ajax/yjyg/date/2022-03-31',
         'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': "macOS",
         'Sec-Fetch-Dest': 'document',
         'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
+        'Sec-Fetch-Site': 'same-origin',
         'Sec-Fetch-User': '?1',
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36',
-        'hexin-v': 'A98_Lq6rwYKwycWe-CuYfkBwaDhsRDQOTZA3xHEseVbVGPEmeRTDNl1oxyOC',
       }
     })
+    console.log(`请求成功====>vvvv=1; v=A-jfrl3BHp92BjIb-QYXE4Otv93_EUwbLnUgn6IZNGNW_YbDSiEcq36F8C7x`)
   }catch(error){
     console.log(`请求错误====>${error.response.status}`)
   }

@@ -19,7 +19,7 @@ async function setIntervalTaskFiveSecond(){
 // 每隔10秒去执行的定时任务
 async function setIntervalTaskFortySecond(){
   setInterval(() => {
-    stockPerformanceForeshow.performanceForecast202201()
+    // stockPerformanceForeshow.performanceForecast202201()
   }, 30000);
 }
 

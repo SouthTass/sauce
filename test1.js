@@ -6,18 +6,34 @@ const iconv = require('iconv-lite')
 // 查询业绩预告(2022年一季报)
 async function tests (){
   let body = {}
+  let res
   try {
-    let res = await axios.get('https://data.10jqka.com.cn/ajax/yjyg/date/2022-03-31', { 
-      responseType: 'arraybuffer'
+    res = await axios.get('https://data.10jqka.com.cn/ajax/yjyg/date/2022-03-31', { 
+      responseType: 'arraybuffer',
+      headers: {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9',
+        'Cache-Control': 'max-age=0',
+        'Connection': 'keep-alive',
+        'Cookie': 'vvvv=1; v=A-jfrl3BHp92BjIb-QYXE4Otv93_EUwbLnUgn6IZNGNW_YbDSiEcq36F8C7x',
+        'Host': 'data.10jqka.com.cn',
+        'Referer': 'https://data.10jqka.com.cn/ajax/yjyg/date/2022-03-31',
+        'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': "macOS",
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36',
+      }
     })
+    console.log(1)
   } catch (error) {
-    console.log(1, error.response.status)
-    // let str = iconv.decode(Buffer.from(error.response.data), 'gb2312')
-    // let html = iconv.encode(str, 'utf8').toString()
-    // console.log(html)
+    console.log(error)
   }
-  
-  return
   if(!res) return
   let str = iconv.decode(Buffer.from(res.data), 'gb2312')
   let html = iconv.encode(str, 'utf8').toString()
@@ -37,6 +53,7 @@ async function tests (){
     let tmpBody = JSON.parse(JSON.stringify(body))
     result.push({...tmpBody, status: 0})
   })
+  return
   for(let i = 0; i < result.length; i++){
     let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${result[i].code}&type=${result[i].type}`
     let res = await axios.get(encodeURI(url))

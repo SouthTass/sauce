@@ -112,14 +112,14 @@ performance.performanceForecast202203 = async function (){
         status: 0,
         type: '2022年一季报'
       })
-      for(let i = 0; i < list.length; i++){
-        let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`
-        let res = await axios.get(encodeURI(url))
-        if(res.status == 204){
-          axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', list[i])
-        }
-      }
     })
+    for(let i = 0; i < list.length; i++){
+      let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`
+      let res = await axios.get(encodeURI(url))
+      if(res.status == 204){
+        axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', list[i])
+      }
+    }
   } catch (error) {
     console.log(error)
   }

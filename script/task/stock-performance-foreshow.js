@@ -49,7 +49,7 @@ performance.performanceForecast202201 = async function (){
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'zh-CN,zh;q=0.9',
         'Cache-Control': 'max-age=0',
-        'Connection': 'keep-alive',
+        'Connection': 'close',
         'Cookie': 'vvvv=1; v=A3OT6noHFQLcQdlWeABMAjwUBHyYqAdqwTxLniUQzxLJJJ1irXiXutEM2-82',
         'Host': 'data.10jqka.com.cn',
         'Referer': 'https://data.10jqka.com.cn/ajax/yjyg/date/2022-03-31',

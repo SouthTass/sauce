@@ -50,21 +50,14 @@ performance.performanceForecast202201 = async function (){
         'Accept-Language': 'zh-CN,zh;q=0.9',
         'Cache-Control': 'max-age=0',
         'Connection': 'close',
-        'Cookie': 'vvvv=1; v=A3OT6noHFQLcQdlWeABMAjwUBHyYqAdqwTxLniUQzxLJJJ1irXiXutEM2-82',
+        'Cookie': 'v=A3OT6noHFQLcQdlWeABMAjwUBHyYqAdqwTxLniUQzxLJJJ1irXiXutEM2-82',
         'Host': 'data.10jqka.com.cn',
         'Referer': 'https://data.10jqka.com.cn/ajax/yjyg/date/2022-03-31',
-        'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': "macOS",
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'same-origin',
-        'Sec-Fetch-User': '?1',
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36',
       }
     })
-    console.log(`请求成功====>vvvv=1; v=A3OT6noHFQLcQdlWeABMAjwUBHyYqAdqwTxLniUQzxLJJJ1irXiXutEM2-82`)
+    console.log(`请求成功====>v=A3OT6noHFQLcQdlWeABMAjwUBHyYqAdqwTxLniUQzxLJJJ1irXiXutEM2-82`)
   }catch(error){
     console.log(`请求错误====>${error.response.status}`)
   }

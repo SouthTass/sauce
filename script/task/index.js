@@ -19,7 +19,7 @@ async function setIntervalTaskFiveSecond(){
 async function setIntervalTaskFortySecond(){
   setInterval(() => {
     stockPerformanceForeshow.performanceForecast202201()
-  }, 5000);
+  }, 30000);
 }
 
 module.exports = task

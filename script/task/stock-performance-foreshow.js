@@ -85,6 +85,7 @@ performance.performanceForecast202201 = async function (){
         body.type = '2022年一季报'
       }
     })
+    body.content = body.content.replace(/,/g, '，')
     if(body.profit == '-') body.profit = '暂无数据'
     let tmpBody = JSON.parse(JSON.stringify(body))
     result.push({...tmpBody, status: 0})

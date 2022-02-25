@@ -118,6 +118,8 @@ performance.performanceForecast202203 = async function (){
       let res = await axios.get(encodeURI(url))
       if(res.status == 204){
         axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', list[i])
+      }else{
+        console.log(`请求成功====>【${list[i].code} ${list[i].name}】不是新数据`)
       }
     }
   } catch (error) {

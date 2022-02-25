@@ -12,6 +12,7 @@ task.init = function init(){
 async function setIntervalTaskFiveSecond(){
   setInterval(() => {
     stockPerformanceForeshow.performanceForecast()
+    stockPerformanceForeshow.performanceForecast202203()
   }, 5000);
 }
 

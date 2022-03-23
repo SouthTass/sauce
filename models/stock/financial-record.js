@@ -23,7 +23,7 @@ class FinancialRecord extends Model {
       // 获取盈利最多的个股
       let maxStock = await FinancialRecord.findOne({
         order: [
-          ['profit', 'ASC']
+          ['profit', 'DESC']
         ]
       })
       result.max_stcok = maxStock || null
@@ -31,14 +31,10 @@ class FinancialRecord extends Model {
       // 获取盈利最少的个股
       let minStock = await FinancialRecord.findOne({
         order: [
-          ['profit', 'DESC']
+          [sequelize.cast(sequelize.col('profit'), 'SIGNED'), 'ASC']
         ]
       })
       result.min_stcok = minStock || null
-
-      // 获取每个个股的统计
-      
-
       return result
     } catch (error) {
       throw new global.customError.ServiceError(error.message)

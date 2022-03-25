@@ -12,29 +12,14 @@ class FinancialRecord extends Model {
     }
   }
 
+  // 获取统计信息
   static async getStat(){
     try {
       let result = {}
-
-      // 获取盈亏总数
       let total = await FinancialRecord.sum('profit')
       result.total = total || 0
-
-      // 获取盈利最多的个股
-      let maxStock = await FinancialRecord.findOne({
-        order: [
-          [sequelize.cast(sequelize.col('profit'), 'SIGNED'), 'DESC']
-        ]
-      })
-      result.max_stcok = maxStock || null
-
-      // 获取盈利最少的个股
-      let minStock = await FinancialRecord.findOne({
-        order: [
-          [sequelize.cast(sequelize.col('profit'), 'SIGNED'), 'ASC']
-        ]
-      })
-      result.min_stcok = minStock || null
+      result.max_stcok = await getMaxProfitStock()
+      result.min_stcok = await getMinProfitStock()
       return result
     } catch (error) {
       throw new global.customError.ServiceError(error.message)
@@ -58,4 +43,29 @@ FinancialRecord.init({
 
 module.exports = {
   FinancialRecord
+}
+
+
+// 获取盈利最多的个股
+async function getMaxProfitStock(){
+  try {
+    let res = await FinancialRecord.findOne({
+      order: [[sequelize.cast(sequelize.col('profit'), 'SIGNED'), 'DESC']]
+    })
+    return res
+  } catch (error) {
+    throw new global.customError.ServiceError(error.message)
+  }
+}
+
+// 获取盈利最少的个股
+async function getMinProfitStock(){
+  try {
+    let res = await FinancialRecord.findOne({
+      order: [[sequelize.cast(sequelize.col('profit'), 'SIGNED'), 'ASC']]
+    })
+    return res
+  } catch (error) {
+    throw new global.customError.ServiceError(error.message)
+  }
 }

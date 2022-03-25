@@ -23,7 +23,7 @@ class FinancialRecord extends Model {
       // 获取盈利最多的个股
       let maxStock = await FinancialRecord.findOne({
         order: [
-          ['profit', 'DESC']
+          [sequelize.cast(sequelize.col('profit'), 'SIGNED'), 'DESC']
         ]
       })
       result.max_stcok = maxStock || null

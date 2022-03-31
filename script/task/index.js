@@ -5,7 +5,6 @@ let task = {}
 // 初始化任务
 task.init = function init(){
   setIntervalTaskFiveSecond()
-  setIntervalTaskFortySecond()
 }
 
 // 每隔5秒去执行的定时任务

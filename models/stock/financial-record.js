@@ -1,5 +1,5 @@
 const { sequelize } = require('../../core/db')
-const { Sequelize, Model } = require('sequelize')
+const { Sequelize, Model, Op } = require('sequelize')
 
 class FinancialRecord extends Model {
   // 增加清仓信息
@@ -25,6 +25,39 @@ class FinancialRecord extends Model {
       throw new global.customError.ServiceError(error.message)
     }
   }
+
+  // 获取盈利/亏损的所有个股
+  static async getProfitList(type){
+    let opt = {}
+    let sort = ''
+    if(type == 'profit') {
+      opt = {'profit': {[Op.gt]: 0}}
+      sort = 'DESC'
+    }else if(type == 'loss') {
+      opt = {'profit': {[Op.lt]: 0}}
+      sort = 'ASC'
+    }else{
+      throw new global.customError.ServiceError('请输入正确的参数')
+    }
+    try {
+      let res = await FinancialRecord.findAll({
+        where: opt,
+        order: [[sequelize.cast(sequelize.col('profit'), 'SIGNED'), sort]]
+      })
+      let result = {
+        total: 0,
+        list: res
+      }
+      if(res){
+        result.total = 0
+        res.map(e => result.total += Number(e.profit))
+      }
+      result.total = result.total.toFixed(2)
+      return result
+    } catch (error) {
+      throw new global.customError.ServiceError(error.message)
+    }
+  }
 }
 
 FinancialRecord.init({
@@ -39,7 +72,7 @@ FinancialRecord.init({
   sell_price: Sequelize.STRING,
 }, {
   sequelize, tableName: 'financial_record'
-})
+}) 
 
 module.exports = {
   FinancialRecord

@@ -4,18 +4,22 @@ const router = new Router({
   prefix: '/stock'
 })
 
-// // 查找数据库中有无该消息
-// router.get('/newslist/findone', async (ctx, next) => {
-//   let res = await FinancialRecord.getItemInfo(ctx.query.nid)
-//   if(res) ctx.body = res
-// })
-
 /**
  * 查询盈亏统计
  */
 router.get('/financial/record/stat', async (ctx, next) => {
-  let res = await FinancialRecord.getStat()
-  if(res) ctx.body = res
+  let query = ctx.query
+  let res
+  if(!Object.keys(query).length){
+    res = await FinancialRecord.getStat()
+  }
+  if(ctx.query.type == 'profit'){
+    res = await FinancialRecord.getProfitList('profit')
+  }
+  if(ctx.query.type == 'loss'){
+    res = await FinancialRecord.getProfitList('loss')
+  }
+  if(res) return ctx.body = res
 })
 
 /**
@@ -34,12 +38,5 @@ router.post('/financial/record/add', async (ctx, next) => {
   let res = await FinancialRecord.addItem(body)
   if(res) ctx.body = res
 })
-
-// // 修改信息状态
-// router.post('/financial/record/add', async (ctx, next) => {
-//   let body = ctx.request.body
-//   let res = await FinancialRecord.updateItem(body.nid)
-//   if(res) ctx.body = res
-// })
 
 module.exports = router

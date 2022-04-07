@@ -23,6 +23,16 @@ router.get('/financial/record/stat', async (ctx, next) => {
 })
 
 /**
+ * 查询个股盈亏统计
+ */
+router.get('/financial/record/item', async (ctx, next) => {
+  let query = ctx.query
+  if(!query.code && !query.name) throw new global.customError.ServiceError('股票代码或名称不能为空')
+  let res = await FinancialRecord.getItemStat(query.code || '', query.name || '')
+  if(res) return ctx.body = res
+})
+
+/**
  * 添加清仓情况
  * @param {string} code               必填，股票代码
  * @param {string} name               必填，股票名称

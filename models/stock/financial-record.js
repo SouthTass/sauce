@@ -58,6 +58,25 @@ class FinancialRecord extends Model {
       throw new global.customError.ServiceError(error.message)
     }
   }
+
+  // 获取个股的盈亏统计
+  static async getItemStat(code, name){
+    try {
+      let query = {}
+      if(code){
+        query.code = code
+      }else if(name){
+        query.name = name
+      }
+      let data = await FinancialRecord.findAll({where: query})
+      if(!data) new global.customError.ServiceError(`暂无${code || name}相关数据`)
+      let result = {total: 0, list: data}
+      data.map(e => result.total = result.total + Number(e.profit))
+      return result
+    } catch (error) {
+      throw new global.customError.ServiceError(error.message)
+    }
+  }
 }
 
 FinancialRecord.init({

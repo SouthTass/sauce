@@ -18,8 +18,8 @@ class FinancialRecord extends Model {
       let result = {}
       let total = await FinancialRecord.sum('profit')
       result.total = Number(total).toFixed(2) || 0
-      result.max_stcok = await getMaxProfitStock()
       result.min_stcok = await getMinProfitStock()
+      result.max_stcok = await getMaxProfitStock()
       return result
     } catch (error) {
       throw new global.customError.ServiceError(error.message)

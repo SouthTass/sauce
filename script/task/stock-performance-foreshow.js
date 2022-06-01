@@ -7,7 +7,7 @@ const iconv = require('iconv-lite')
 performance.performanceForecast202203 = async function (){
   let res
   try {
-    res = await axios.get('http://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=50&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272022-03-31%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
+    res = await axios.get('https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=5&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272022-06-30%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
     if(!(res?.data?.result?.data)) return
     let tmpList = res.data.result.data.slice(0, 5)
     let list = []
@@ -21,7 +21,7 @@ performance.performanceForecast202203 = async function (){
         profit: 0,
         time: e.NOTICE_DATE,
         status: 0,
-        type: '2022年一季报'
+        type: '2022年半年报'
       })
     })
     for(let i = 0; i < list.length; i++){

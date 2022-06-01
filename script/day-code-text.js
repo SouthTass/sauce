@@ -2,44 +2,43 @@ const axios = require('axios')
 const dayjs = require('dayjs')
 
 let text = `1、章盟主
-买入：雅本化学、艾布鲁、爱旭股份
-卖出：中交地产
+买入：长安汽车
+卖出：金陵饭店
 
-2、赵老哥
-买入：建艺集团、步步高、鹿山新材、华东重机
-卖出：望变电气、华东重机、步步高
+2、上海溧阳路
+买入：联盛化学、利和兴、新华制药
+卖出：金埔园林、利和兴、新华制药、中交地产
 
-3、上海溧阳路
-买入：安徽建工、山河药辅、中设股份、盛弘股份、雅本化学、联盛化学、中交地产、湖南发展
-卖出：山河药辅、凯淳股份、永泰运、中交地产
+3、宁波桑田路
+买入：通达电气、湖南天雁
+卖出：嘉环科技、恒大高新、泰慕士
 
 4、竞价抢筹
-买入：上海港湾、步步高
-卖出：若羽臣、徐家汇、步步高
+买入：金陵饭店
+卖出：瑞茂通
 
-5、歌神
-买入：普邦股份
-卖出：宏德股份、华东重机、徐家汇
+5、著名刺客
+买入：财信发展、亿利达
 
-6、成都系
-买入：普邦股份
-卖出：普邦股份
+6、猪肉荣
+卖出：嘉环科技
 
-7、方新侠
-买入：复旦复华
+7、作手新一
+买入：运机集团
 
-8、著名刺客
-买入：罗欣药业
-卖出：罗欣药业
+8、歌神
+卖出：普邦股份、恒大高新
 
-9、宁波桑田路
-卖出：若羽臣
+9、银河绍兴路
+买入：特发服务
+卖出：上海九百、艾布鲁、建艺集团、步步高
 
-10、西湖国贸
-买入：天津松江、奥翔药业
+10、竞价抢筹
+买入：金陵饭店
+卖出：瑞茂通
 
-11、作手新一
-卖出：华升股份`
+11、飞云江路
+买入：登云股份`
 
 let result = []
 let a = text.split(`\n`)
@@ -64,12 +63,12 @@ let record = []
 for(let i = 0; i < result.length; i++){
   if(result[i].buy){
     result[i].buy.map(e => {
-      record.push({name: e, tag: '买入', source: result[i].name, time: dayjs().format('YYYY-MM-DD')})
+      record.push({name: e, tag: '买入', source: result[i].name, time: dayjs('2022-05-13').format('YYYY-MM-DD')})
     })
   }
   if(result[i].sell){
     result[i].sell.map(e => {
-      record.push({name: e, tag: '卖出', source: result[i].name, time: dayjs().format('YYYY-MM-DD')})
+      record.push({name: e, tag: '卖出', source: result[i].name, time: dayjs('2022-05-13').format('YYYY-MM-DD')})
     })
   }
 }

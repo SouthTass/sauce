@@ -77,6 +77,23 @@ class FinancialRecord extends Model {
       throw new global.customError.ServiceError(error.message)
     }
   }
+
+  static async getClearanceStock(){
+    try {
+      let res = await FinancialRecord.findAll({
+        group: 'code',
+        attributes: [
+          'code',
+          'name',
+          [sequelize.fn('SUM', sequelize.col('profit')), 'profit']
+        ]
+      })
+      console.log(res)
+      return res
+    } catch (error) {
+      throw new global.customError.ServiceError(error.message)
+    }
+  }
 }
 
 FinancialRecord.init({
@@ -121,3 +138,8 @@ async function getMinProfitStock(){
     throw new global.customError.ServiceError(error.message)
   }
 }
+
+// 目前暂未盈利的个股，以及现在的股价相比于当时的股价的涨跌幅
+// async function getClearanceStock(){
+  
+// }

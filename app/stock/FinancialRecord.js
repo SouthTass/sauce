@@ -33,6 +33,14 @@ router.get('/financial/record/item', async (ctx, next) => {
 })
 
 /**
+ * 查询全部盈亏情况
+ */
+router.get('/financial/record/all', async (ctx, next) => {
+  res = await FinancialRecord.getClearanceStock()
+  if(res) return ctx.body = res
+})
+
+/**
  * 添加清仓情况
  * @param {string} code               必填，股票代码
  * @param {string} name               必填，股票名称

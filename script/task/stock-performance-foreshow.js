@@ -3,7 +3,7 @@ const axios = require('axios')
 const cheerio = require("cheerio")
 const iconv = require('iconv-lite')
 
-// 查询业绩预告(2022年第一季报东方财富版)
+// 查询业绩预告
 performance.performanceForecast202203 = async function (){
   let res
   try {

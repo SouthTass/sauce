@@ -12,17 +12,18 @@ performance.performanceForecast202203 = async function (){
     let tmpList = res.data.result.data
     let list = []
     tmpList.map(e => {
-      list.push({
+      let item = {
         code: e.SECURITY_CODE,
         name: e.SECURITY_NAME_ABBR,
         foreshow_type: e.PREDICT_TYPE,
-        content: e.CHANGE_REASON_EXPLAIN || e.PREDICT_CONTENT,
+        content: e.PREDICT_CONTENT + e.CHANGE_REASON_EXPLAIN,
         float: e.ADD_AMP_LOWER,
         profit: 0,
         time: e.NOTICE_DATE,
         status: 0,
         type: '2022年三季报'
-      })
+      }
+      list.push(item)
     })
     for(let i = 0; i < list.length; i++){
       let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`

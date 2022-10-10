@@ -16,7 +16,7 @@ performance.performanceForecast202203 = async function (){
         code: e.SECURITY_CODE,
         name: e.SECURITY_NAME_ABBR,
         foreshow_type: e.PREDICT_TYPE,
-        content: e.PREDICT_CONTENT + e.CHANGE_REASON_EXPLAIN,
+        content: `${e.PREDICT_CONTENT}。\n${e.CHANGE_REASON_EXPLAIN}`,
         float: e.ADD_AMP_LOWER,
         profit: 0,
         time: e.NOTICE_DATE,

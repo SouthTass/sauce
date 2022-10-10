@@ -21,7 +21,7 @@ performance.performanceForecast202203 = async function (){
         profit: 0,
         time: e.NOTICE_DATE,
         status: 0,
-        type: '2022年半年报'
+        type: '2022年三季报'
       })
     })
     for(let i = 0; i < list.length; i++){

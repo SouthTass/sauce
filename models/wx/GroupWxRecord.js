@@ -28,6 +28,7 @@ class GroupWxRecord extends Model {
           [Op.between]: [start_time, end_time]
         }
       },
+      order: [[ 'created_at', 'DESC' ]],
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
     return list

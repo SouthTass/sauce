@@ -2,9 +2,9 @@ const { sequelize } = require('../../core/db')
 const { Sequelize, Model, Op } = require('sequelize')
 
 class GroupWxRecord extends Model {
-  static async saveRecord(room, from_name, content){
+  static async saveRecord(room, from_name, content, wxid){
     return await GroupWxRecord.create({
-      room, from_name, content
+      room, from_name, content, wxid
     })
   }
 

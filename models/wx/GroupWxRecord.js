@@ -56,6 +56,7 @@ GroupWxRecord.init({
   room: Sequelize.STRING,
   content: Sequelize.TEXT,
   from_name: Sequelize.STRING,
+  wxid: Sequelize.STRING
 }, {
     sequelize,
     tableName: 'group_wx_record'

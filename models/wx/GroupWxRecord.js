@@ -33,6 +33,18 @@ class GroupWxRecord extends Model {
     if(!list) throw new global.customError.ServiceError('暂无记录')
     return list
   }
+
+  static async getChatUser(room){
+    let list = await GroupWxRecord.findAll({
+      where: {
+        room,
+      },
+      group: 'from_name',
+      attributes: ['from_name']
+    })
+    if(!list) throw new global.customError.ServiceError('暂无记录')
+    return list
+  }
 }
 
 GroupWxRecord.init({

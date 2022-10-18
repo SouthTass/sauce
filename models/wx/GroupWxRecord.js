@@ -1,5 +1,5 @@
 const { sequelize } = require('../../core/db')
-const { Sequelize, Model } = require('sequelize')
+const { Sequelize, Model, Op } = require('sequelize')
 
 class GroupWxRecord extends Model {
   static async saveRecord(room, from_name, content){
@@ -15,6 +15,19 @@ class GroupWxRecord extends Model {
       },
       attributes: ['from_name'],
       group: 'from_name'
+    })
+    if(!list) throw new global.customError.ServiceError('暂无记录')
+    return list
+  }
+
+  static async getChatRecord(name, start_time, end_time){
+    let list = await GroupWxRecord.findAll({
+      where: {
+        from_name: name,
+        created_at: {
+          [Op.between]: [start_time, end_time]
+        }
+      },
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
     return list

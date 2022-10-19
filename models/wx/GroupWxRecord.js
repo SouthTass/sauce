@@ -21,13 +21,14 @@ class GroupWxRecord extends Model {
   }
 
   static async getChatRecord(name, start_time, end_time){
+    let where = {
+      created_at: {
+        [Op.between]: [start_time, end_time]
+      }
+    }
+    if(name) where.from_name = name
     let list = await GroupWxRecord.findAll({
-      where: {
-        from_name: name,
-        created_at: {
-          [Op.between]: [start_time, end_time]
-        }
-      },
+      where,
       order: [[ 'created_at', 'DESC' ]],
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
@@ -44,6 +45,31 @@ class GroupWxRecord extends Model {
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
     return list
+  }
+
+
+  static async getChatUserXi(room){
+    let list = await GroupWxRecord.findAll({
+      // where: {
+      //   room: '反孟机动小分队'
+      // },
+      attributes: ['from_name', 'wxid', 'id']
+    })
+    let num = list.length
+    for(let i = 0; i < num; i++){
+      if(list[i].wxid) continue
+      let index = list.findIndex(e => (e.from_name == list[i].from_name) && e.wxid)
+      if(index == -1) continue
+      await GroupWxRecord.update({
+        wxid: list[index].wxid
+      }, {
+        where: {
+          id: list[i].id
+        }
+      })
+      console.log('成功')
+      if(i + 1 >= num) console.log('结束')
+    }
   }
 }
 

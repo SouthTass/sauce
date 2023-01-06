@@ -7,7 +7,7 @@ const iconv = require('iconv-lite')
 performance.performanceForecast202203 = async function (){
   let res
   try {
-    res = await axios.get('https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=5&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272022-09-30%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
+    res = await axios.get('https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=5&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272022-12-31%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
     if(!(res?.data?.result?.data)) return
     let tmpList = res.data.result.data
     let list = []
@@ -22,15 +22,15 @@ performance.performanceForecast202203 = async function (){
         profit: 0,
         time: e.NOTICE_DATE,
         status: 0,
-        type: '2022年三季报'
+        type: '2022年年报'
       }
       list.push(item)
     })
     for(let i = 0; i < list.length; i++){
-      let url = `http://sauce.coconer.cn/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`
+      let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`
       let res = await axios.get(encodeURI(url))
       if(res.status == 204){
-        let a = await axios.post('http://sauce.coconer.cn/stock/performance/foreshow/add', list[i])
+        let a = await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', list[i])
         console.log(a)
       }else{
         console.log(`【${list[i].code} ${list[i].name}】不是新数据`)

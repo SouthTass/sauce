@@ -1,4 +1,3 @@
-const dayjs = require('dayjs')
 const stockPerformanceForeshow = require('./stock-performance-foreshow')
 let task = {}
 

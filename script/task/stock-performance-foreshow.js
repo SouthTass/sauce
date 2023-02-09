@@ -1,14 +1,12 @@
 let performance = {}
 const axios = require('axios')
-const cheerio = require("cheerio")
-const iconv = require('iconv-lite')
 
 // 查询业绩预告
 performance.performanceForecast202203 = async function (){
   let res
   try {
     res = await axios.get('https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=5&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272022-12-31%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
-    if(!(res?.data?.result?.data)) return
+    if(!res?.data?.result?.data) return
     let tmpList = res.data.result.data
     let list = []
     tmpList.map(e => {
@@ -17,7 +15,6 @@ performance.performanceForecast202203 = async function (){
         name: e.SECURITY_NAME_ABBR,
         foreshow_type: e.PREDICT_TYPE,
         content: `${e.PREDICT_CONTENT}`,
-        // content: `${e.PREDICT_CONTENT}\n${e.CHANGE_REASON_EXPLAIN}`,
         float: e.ADD_AMP_LOWER,
         profit: 0,
         time: e.NOTICE_DATE,

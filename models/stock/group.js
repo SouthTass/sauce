@@ -12,7 +12,7 @@ class Main extends Model {
   }
 
   static async getOneGroup(body){
-    let res = await Main.findOne({
+    let res = await Main.findAll({
       where: body,
       order: [[ 'created_at', 'DESC' ]],
     })

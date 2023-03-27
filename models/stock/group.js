@@ -30,8 +30,9 @@ Main.init({
   },
   wx_id: Sequelize.STRING,
   wx_name: Sequelize.STRING,
-  wx_roomid: Sequelize.STRING,
-  key_eord: Sequelize.STRING,
+  wx_room_id: Sequelize.STRING,
+  wx_room_name: Sequelize.STRING,
+  key_word: Sequelize.STRING,
   content: Sequelize.STRING,
 }, {
   sequelize, tableName: 'performance_foreshow'

@@ -14,7 +14,7 @@ class Main extends Model {
   static async getOneGroup(body){
     let res = await Main.findOne({
       where: body,
-      order: [['DESC']]
+      order: [[ 'created_at', 'DESC' ]],
     })
     if(res){
       return res

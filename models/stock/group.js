@@ -35,7 +35,7 @@ Main.init({
   key_word: Sequelize.STRING,
   content: Sequelize.STRING,
 }, {
-  sequelize, tableName: 'performance_foreshow'
+  sequelize, tableName: 'user_stock_group'
 })
 
 module.exports = {

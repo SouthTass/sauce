@@ -7,7 +7,7 @@ class InitManager{
     InitManager.initLoadRouters()
     InitManager.importGlobalError()
     InitManager.loadConfig()
-    InitManager.timedTask()
+    if(process.env.USER != 'wzt') InitManager.timedTask()
   }
 
   static loadConfig(path = ''){

@@ -13,7 +13,8 @@ class Main extends Model {
 
   static async getOneGroup(body){
     let res = await Main.findOne({
-      where: body
+      where: body,
+      order: [['DESC']]
     })
     if(res){
       return res

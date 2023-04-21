@@ -11,7 +11,7 @@ task.init = function init(){
 async function setIntervalTaskFiveSecond(){
   setInterval(() => {
     
-  }, 5000);
+  }, 5000)
 }
 
 // 每隔60秒去执行的定时任务
@@ -19,7 +19,7 @@ async function setIntervalTaskSixtySecond(){
   setInterval(() => {
     stockPerformanceForeshow.performanceForecast202203()
     stockPerformanceForeshow.performanceForecast202303()
-  }, 60000);
+  }, 60000)
 }
 
 module.exports = task

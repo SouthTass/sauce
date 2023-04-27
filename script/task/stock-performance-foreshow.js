@@ -20,6 +20,7 @@ performance.performanceForecast202203 = async function (){
         time: e.NOTICE_DATE,
         status: 0,
         type: '2022年年报'
+        
       }
       list.push(item)
     })

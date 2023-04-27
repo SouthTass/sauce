@@ -25,7 +25,6 @@ router.get('/chat/num', async (ctx, next) => {
 
 router.get('/chat/record', async (ctx, next) => {
   let query = ctx.query
-  // if(!query.name) throw new global.customError.ServiceError('查询人名称不能为空')
   let params = query
   if(!query.start_time) params.start_time = `${dayjs().format('YYYY-MM-DD')} 00:00:00`
   if(!query.end_time) params.end_time = `${dayjs().format('YYYY-MM-DD')} 23:59:59`

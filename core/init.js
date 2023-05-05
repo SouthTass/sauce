@@ -22,6 +22,11 @@ class InitManager{
       visit: whenLoadModule
     })
 
+    const toolsDirectory = `${process.cwd()}/app/tools`
+    requireDirectory(module, toolsDirectory, {
+      visit: whenLoadModule
+    })
+
     const stockDirectory = `${process.cwd()}/app/stock`
     requireDirectory(module, stockDirectory, {
       visit: whenLoadModule

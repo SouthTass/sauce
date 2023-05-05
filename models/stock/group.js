@@ -23,6 +23,7 @@ class Main extends Model {
     }
   }
 }
+
 Main.init({
   id: {
     type: Sequelize.INTEGER,

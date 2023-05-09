@@ -1,13 +1,7 @@
-const redis = require('redis')
-const redisClient = redis.createClient('63279', '101.43.217.166')
-redisClient.on('error', err => {
-  console.log(err)
-})
+const axios = require('axios')
 
-redisClient.connect('6379', '101.43.217.166')
-  .then(() => {
-    redisClient.set('name', 'zhangsan')
-      .then(val => {
-        console.log(val)
-      })
-  })
+async function writeRecord(){
+  let res = await axios.get('http://vweixinf.tc.qq.com/110/20401/stodownload?m=f2e2ea6c61ce2d06e90da157c243b92b&filekey=3043020101042f302d02016e04025348042066326532656136633631636532643036653930646131353763323433623932620202339f040d00000004627466730000000131&hy=SH&storeid=323032313037313431323235323030303031636362616131626536373163373536366234306230303030303036653031303034666231&ef=1&bizid=1022')
+  console.log(res.data)
+}
+writeRecord()

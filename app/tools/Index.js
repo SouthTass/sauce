@@ -4,6 +4,7 @@ const router = new Router({
   prefix: '/tools'
 })
 
+// 获取服务器当前时间
 router.get('/time/now', async (ctx, next) => {
   ctx.status = 200
   ctx.body = dayjs().format('YYYY-MM-DD HH:mm:ss')

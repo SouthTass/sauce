@@ -30,6 +30,8 @@ class GroupWxRecord extends Model {
     let list = await GroupWxRecord.findAll({
       where,
       order: [[ 'created_at', 'DESC' ]],
+      offset: 0,
+      limit: 200
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
     return list

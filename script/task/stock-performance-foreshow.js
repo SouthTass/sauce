@@ -88,9 +88,7 @@ performance.performanceTimeDayPrice = async function (){
     let codetmp = res.data.split(';')
     codetmp.map(item => {
       let result = item.split('~')
-      result.map(e => {
-        money += Number(e[32])
-      })
+      money += Number(result[37])
     })
     
     await axios.post(`https://sauce.cocosnet.cn/stock/timeprice/add`, {

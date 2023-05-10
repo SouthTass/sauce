@@ -104,5 +104,3 @@ performance.performanceTimeDayPrice = async function (){
 }
 
 module.exports = performance
-
-performance.performanceTimeDayPrice()

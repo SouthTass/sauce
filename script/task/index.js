@@ -10,7 +10,7 @@ task.init = function init(){
 // 每隔5秒去执行的定时任务
 async function setIntervalTaskFiveSecond(){
   setInterval(() => {
-    
+    stockPerformanceForeshow.performanceTimeDayPrice()
   }, 5000)
 }
 

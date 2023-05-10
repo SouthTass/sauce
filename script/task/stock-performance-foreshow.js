@@ -1,5 +1,6 @@
 let performance = {}
 const axios = require('axios')
+const dayjs = require('dayjs')
 
 // 查询业绩预告
 performance.performanceForecast202203 = async function (){
@@ -76,4 +77,34 @@ performance.performanceForecast202303 = async function (){
   }
 }
 
+// 查询指定股票的价格
+performance.performanceTimeDayPrice = async function (){
+  try {
+    let money = 0
+    let res = await axios.get(`http://sqt.gtimg.cn/utf8/q=sh000001,sz399001`)
+    if (res.status != 200) return []
+    res.data = res.data.replace(/\ +/g, "")
+    res.data = res.data.replace(/[\r\n]/g, '')
+    let codetmp = res.data.split(';')
+    codetmp.map(item => {
+      let result = item.split('~')
+      result.map(e => {
+        money += Number(e[32])
+      })
+    })
+    
+    await axios.post(`https://sauce.cocosnet.cn/stock/timeprice/add`, {
+      code: 'sh999999',
+      name: 'A股大盘',
+      price: '0.00',
+      day_total_price: money,
+      time: dayjs().format('YYYY-MM-DD HH:mm:ss')
+    })
+  } catch (error) {
+    
+  }
+}
+
 module.exports = performance
+
+performance.performanceTimeDayPrice()

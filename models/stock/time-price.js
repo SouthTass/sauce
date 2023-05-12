@@ -1,5 +1,6 @@
 const { sequelize } = require('../../core/db')
-const { Sequelize, Model } = require('sequelize')
+const { Sequelize, Model, Op } = require('sequelize')
+const dayjs = require('dayjs')
 
 class MainFunction extends Model {
   static async addOneItem(body){
@@ -16,6 +17,30 @@ class MainFunction extends Model {
       let res = await MainFunction.findOne({
         where: params
       })
+      if(res) return res
+    } catch (error) {
+      return `${error.name} - ${error.parent.sqlMessage}`
+    }
+  }
+
+  static async getOneItemInCurrentTime(params){
+    try {
+      console.log(params)
+      let res = await MainFunction.findOne({
+        where: {
+          code: params.code,
+          time: {
+            [Op.between]: [
+              dayjs(params.start).format('YYYY-MM-DD HH:mm:00'),
+              dayjs(params.end).format('YYYY-MM-DD HH:mm:59')
+            ]
+          }
+        },
+        order: [
+          ['time', 'DESC']
+        ]
+      })
+      console.log(res)
       if(res) return res
     } catch (error) {
       return `${error.name} - ${error.parent.sqlMessage}`

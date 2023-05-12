@@ -17,4 +17,10 @@ router.get('/find', async (ctx, next) => {
   if(res) ctx.body = res
 })
 
+
+// 查询大盘同一时间交易数量
+router.get('/allrpice', async (ctx, next) => {
+  let res = await StockTimePrice.getOneItemInCurrentTime(ctx.query)
+  if(res) ctx.body = res
+})
 module.exports = router

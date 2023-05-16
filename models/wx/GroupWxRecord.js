@@ -20,18 +20,20 @@ class GroupWxRecord extends Model {
     return list
   }
 
-  static async getChatRecord(name, start_time, end_time){
+  static async getChatRecord(params){
     let where = {
       created_at: {
-        [Op.between]: [start_time, end_time]
-      }
+        [Op.between]: [params.start_time, params.end_time]
+      },
+      ...params
     }
-    if(name) where.from_name = name
+    delete params.start_time
+    delete params.end_time
     let list = await GroupWxRecord.findAll({
       where,
       order: [[ 'created_at', 'DESC' ]],
       offset: 0,
-      limit: 200
+      limit: 300
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
     return list

@@ -28,7 +28,7 @@ router.get('/chat/record', async (ctx, next) => {
   let params = query
   if(!query.start_time) params.start_time = `${dayjs().format('YYYY-MM-DD')} 00:00:00`
   if(!query.end_time) params.end_time = `${dayjs().format('YYYY-MM-DD')} 23:59:59`
-  let res = await GroupWxRecord.getChatRecord(params.name || '', params.start_time, params.end_time)
+  let res = await GroupWxRecord.getChatRecord(params)
   if(!res) throw new global.customError.ServiceError('暂无数据')
   ctx.status = 200
   ctx.body = res

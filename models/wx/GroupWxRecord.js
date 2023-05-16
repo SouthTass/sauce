@@ -27,8 +27,9 @@ class GroupWxRecord extends Model {
       },
       ...params
     }
-    delete params.start_time
-    delete params.end_time
+    delete where.start_time
+    delete where.end_time
+    console.log(where)
     let list = await GroupWxRecord.findAll({
       where,
       order: [[ 'created_at', 'DESC' ]],

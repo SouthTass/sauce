@@ -3,6 +3,7 @@ const { Sequelize, Model, Op } = require('sequelize')
 
 class GroupWxRecord extends Model {
   static async saveRecord(room, from_name, content, wxid, type){
+    console.log(1, room, from_name, content, wxid, type)
     return await GroupWxRecord.create({
       room, from_name, content, wxid, type
     })
@@ -29,7 +30,6 @@ class GroupWxRecord extends Model {
     }
     delete where.start_time
     delete where.end_time
-    console.log(where)
     let list = await GroupWxRecord.findAll({
       where,
       order: [[ 'created_at', 'DESC' ]],
@@ -87,7 +87,8 @@ GroupWxRecord.init({
   room: Sequelize.STRING,
   content: Sequelize.TEXT,
   from_name: Sequelize.STRING,
-  wxid: Sequelize.STRING
+  wxid: Sequelize.STRING,
+  type: Sequelize.STRING
 }, {
     sequelize,
     tableName: 'group_wx_record'

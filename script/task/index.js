@@ -10,15 +10,14 @@ task.init = function init(){
 // 每隔5秒去执行的定时任务
 async function setIntervalTaskFiveSecond(){
   setInterval(() => {
-    stockPerformanceForeshow.performanceTimeDayPrice()
+    // stockPerformanceForeshow.performanceTimeDayPrice()
   }, 5000)
 }
 
 // 每隔60秒去执行的定时任务
 async function setIntervalTaskSixtySecond(){
   setInterval(() => {
-    stockPerformanceForeshow.performanceForecast202203()
-    stockPerformanceForeshow.performanceForecast202303()
+    stockPerformanceForeshow.performanceForecast()
   }, 60000)
 }
 

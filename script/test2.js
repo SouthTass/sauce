@@ -1,5 +1,6 @@
 const fs = require('fs')
 const axios = require('axios')
+const dayjs = require('dayjs')
 
 async function writeRecord(){
   // let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=50000')
@@ -23,7 +24,8 @@ async function readRecord(){
     let num = list[i].lotteryDrawResult.split(' ')
     let body = {
       type: '大乐透',
-      code: list[i].lotteryDrawNum
+      code: list[i].lotteryDrawNum,
+      open_prize_date: list[i].lotterySaleBeginTime
     }
     for(let m = 0; m < 7; m++){
       body[`ball${m}`] = num[m]
@@ -32,4 +34,4 @@ async function readRecord(){
   }
 }
 
-// readRecord()
+readRecord()

@@ -22,10 +22,21 @@ Main.init({
   ball3: Sequelize.STRING,
   ball4: Sequelize.STRING,
   ball5: Sequelize.STRING,
-  ball6: Sequelize.STRING
+  ball6: Sequelize.STRING,
+  open_prize_date: Sequelize.STRING
 }, {
     sequelize,
-    tableName: 'powerball'
+    tableName: 'powerball',
+    indexes: [
+      { 
+        unique: false, 
+        fields: ['id'] 
+      },
+      { 
+        unique: false, 
+        fields: ['code'] 
+      }
+    ]
   }
 )
 

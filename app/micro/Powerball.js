@@ -5,8 +5,6 @@ const router = new Router({
   prefix: '/micro'
 })
 
-
-
 router.post('/powerball/add', async (ctx, next) => {
   let body = ctx.request.body
   if(!body.type) throw new global.customError.ServiceError('彩票类型不能为空')

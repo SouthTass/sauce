@@ -1,39 +1,12 @@
-const axios = require('axios')
-const dayjs = require('dayjs')
 const fs = require('fs')
+const axios = require('axios')
 
 async function writeRecord(){
-  // console.log(2)
-  // let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&pageSize=30000&isVerify=1&pageNo=1', {
-  //   headers: {
-  //     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-  //     'Accept-Encoding': 'gzip, deflate',
-  //     'Accept-Language': 'zh-CN,zh;q=0.9',
-  //     'Cache-Control': 'max-age=0',
-  //     'Connection': 'keep-alive',
-  //     'Cookie': 'HMF_CI=643356ca157c2da8a4f1d7358a3f196dbaef748e5e6383954bef401dfa9e96388a2a1fd057d06aeda840cb5a804f905435b61640d3cf95bae7293e5dbfb426e40a',
-  //     'Host': 'www.sporttery.cn',
-  //     'Upgrade-Insecure-Requests': '1',
-  //     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
-  //   }
-  // })
-  // console.log(1)
-  // console.log(res)
-  const codelist = JSON.parse(fs.readFileSync(`${process.cwd()}/temp/ssq.json`, 'utf8'))
-  let result = []
-  let data = []
-  codelist.value.list.map(e => {
-    data.push(`${e.lotteryDrawResult}`)
-  })
-  data.map(e => {
-    let index = result.findIndex(item => {
-      return item == e
-    })
-    if(index > 0){
-      console.log(e)
-    }else{
-      result.push(e)
-    }
-  })
+  let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=50000')
+  // console.log(res.status)
+  // return
+  if(res.status != 200) return console.log('程序出错')
+  fs.writeFileSync(`${process.cwd()}/temp/dlt.json`, JSON.stringify(res.data.value.list))
+  console.log('存储成功')
 }
 writeRecord()

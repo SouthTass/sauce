@@ -31,6 +31,11 @@ class InitManager{
     requireDirectory(module, stockDirectory, {
       visit: whenLoadModule
     })
+
+    const microDirectory = `${process.cwd()}/app/micro`
+    requireDirectory(module, microDirectory, {
+      visit: whenLoadModule
+    })
     
     function whenLoadModule(obj){
       if(obj instanceof Router){

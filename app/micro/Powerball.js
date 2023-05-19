@@ -17,4 +17,16 @@ router.post('/powerball/add', async (ctx, next) => {
   }
 })
 
+router.get(`/powerball/list`, async (ctx, next) => {
+  let params = ctx.query
+  if(!params.type) throw new global.customError.ServiceError('彩票类型不能为空')
+  let res = await Powerball.getBallList(params)
+  ctx.status = 200
+  ctx.body = {
+    message: 'ok',
+    list: res
+  }
+  return res
+})
+
 module.exports = router

@@ -3,8 +3,11 @@ const { Sequelize, Model, Op } = require('sequelize')
 
 class Main extends Model {
   static async saveBall(body){
-    console.log(body)
     return await Main.create(body)
+  }
+
+  static async getBallList(params){
+    return await Main.findAll({where: params})
   }
 }
 

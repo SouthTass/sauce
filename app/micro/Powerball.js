@@ -41,11 +41,25 @@ router.get(`/powerball/ssq`, async (ctx, next) => {
     throw new global.customError.ServiceError('彩票号码有误')
   }
   if(arr.length != 7) throw new global.customError.ServiceError('彩票号码有误')
-  let res = await Powerball.getBallList(params)
+  let res = await Powerball.getBallList({type: params.type})
   if(!res) throw new global.customError.ServiceError('服务有误，请稍后再试')
-  res.data.list.map(e => {
-    
+  if(res.length < 1){
+    ctx.status = 200
+    ctx.body = res
+    return
+  }
+  let result = []
+  res.map(e => {
+    let i = 0
+    arr.map(item => {
+      if(e.ball0 == item) i++
+    })
+    e.conform = i
+    if(e.conform > 0) result.push(e)
   })
+
+  ctx.status = 200
+  ctx.body = result
 })
 
 module.exports = router

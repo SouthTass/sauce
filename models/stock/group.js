@@ -22,6 +22,18 @@ class Main extends Model {
       throw new global.customError.EmptyData()
     }
   }
+
+  static async updateGroup(body){
+    let res = await Main.findOne({
+      where: body,
+      order: [[ 'created_at', 'DESC' ]],
+    })
+    if(res){
+      return res
+    }else{
+      throw new global.customError.EmptyData()
+    }
+  }
 }
 
 Main.init({

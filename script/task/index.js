@@ -21,8 +21,8 @@ let task = {}
 
 // 初始化任务
 task.init = function init(){
-  setIntervalTaskFiveSecond()
-  setIntervalTaskSixtySecond()
+  // setIntervalTaskFiveSecond()
+  // setIntervalTaskSixtySecond()
 
   // 每分钟的第一秒执行
   schedule.scheduleJob('01 * * * * *', () => {

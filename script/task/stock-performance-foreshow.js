@@ -64,7 +64,7 @@ performance.performanceTimeDayPrice = async function (){
   }
 }
 
-// 查询快讯
+// 查询同花顺快讯
 performance.thsNews = async function (){
   let res
   try {
@@ -91,28 +91,6 @@ performance.thsNews = async function (){
     }
   } catch (error) {
     console.log(error)
-  }
-}
-
-// 发送同花顺新闻
-let newsList = []
-async function sendNews(bot){
-  // 获取同花顺新闻
-  let res
-  try {
-    res = await axios.get(`https://news.10jqka.com.cn/tapp/news/push/stock/?kid=0&tag=%E5%BC%82%E5%8A%A8&trace=website`)
-  } catch (error) {
-    return console.log('调用异动消息接口出错')
-  }
-  
-  if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
-  let list = res.data.data.list.slice(0, 1)
-  for(let i = 0; i < list.length; i++){
-    if(!newsList.find(n => n.id == list[i].id)){
-      newsList.push(list[i])
-      let room = await bot.Room.find({id: '39062224312@chatroom'})
-      await room.say(`【${list[i].title}】\n${list[i].digest}`)
-    }
   }
 }
 

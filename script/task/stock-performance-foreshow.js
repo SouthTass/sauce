@@ -64,6 +64,55 @@ performance.performanceTimeDayPrice = async function (){
   }
 }
 
-module.exports = performance
+// 查询快讯
+performance.thsNews = async function (){
+  let res
+  try {
+    res = await axios.get('https://news.10jqka.com.cn/tapp/news/push/stock/?kid=0&tag=%E5%BC%82%E5%8A%A8&trace=website')
+    if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
+    if(res.data.data.list.length < 1) return
+    let data = res.data.data.list[0]
+    let result = await axios.get(`http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}`)
+    if(result.status == 204){
+      await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
+        code: data.id,
+        name: data.title,
+        foreshow_type: '异动',
+        content: data.digest,
+        float: 0,
+        profit: 0,
+        time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+        status: 0,
+        type: '同花顺新闻'
+      })
+    }else{
+      console.log(`不是新数据：【${data.id}】${data.title}`)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-// performance.performanceTimeDayPrice()
+// 发送同花顺新闻
+let newsList = []
+async function sendNews(bot){
+  // 获取同花顺新闻
+  let res
+  try {
+    res = await axios.get(`https://news.10jqka.com.cn/tapp/news/push/stock/?kid=0&tag=%E5%BC%82%E5%8A%A8&trace=website`)
+  } catch (error) {
+    return console.log('调用异动消息接口出错')
+  }
+  
+  if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
+  let list = res.data.data.list.slice(0, 1)
+  for(let i = 0; i < list.length; i++){
+    if(!newsList.find(n => n.id == list[i].id)){
+      newsList.push(list[i])
+      let room = await bot.Room.find({id: '39062224312@chatroom'})
+      await room.say(`【${list[i].title}】\n${list[i].digest}`)
+    }
+  }
+}
+
+module.exports = performance

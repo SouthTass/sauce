@@ -25,6 +25,12 @@ router.get('/status', async (ctx, next) => {
   if(res) ctx.body = res
 })
 
+// 查询指定的消息
+router.get('/list', async (ctx, next) => {
+  let res = await PerformanceForeshow.getRecordStatus(ctx.query)
+  if(res) ctx.body = res
+})
+
 // 修改信息状态
 router.post('/update', async (ctx, next) => {
   let body = ctx.request.body

@@ -27,6 +27,7 @@ task.init = function init(){
   // 每分钟的第一秒执行
   schedule.scheduleJob('01 * * * * *', () => {
     stockPerformanceForeshow.performanceForecast()
+    stockPerformanceForeshow.thsNews()
   })
 }
 

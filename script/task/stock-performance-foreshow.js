@@ -72,7 +72,8 @@ performance.thsNews = async function (){
     if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
     if(res.data.data.list.length < 1) return
     let data = res.data.data.list[0]
-    let result = await axios.get(`http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}`)
+    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&type=同花顺新闻`
+    let result = await axios.get(encodeURI(url))
     if(result.status == 204){
       await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
         code: data.id,

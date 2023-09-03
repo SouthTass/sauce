@@ -25,7 +25,6 @@ class MainFunction extends Model {
 
   static async getOneItemInCurrentTime(params){
     try {
-      console.log(params)
       let res = await MainFunction.findOne({
         where: {
           code: params.code,
@@ -40,7 +39,6 @@ class MainFunction extends Model {
           ['time', 'DESC']
         ]
       })
-      console.log(res)
       if(res) return res
     } catch (error) {
       return `${error.name} - ${error.parent.sqlMessage}`

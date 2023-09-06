@@ -94,4 +94,34 @@ performance.thsNews = async function (){
   }
 }
 
+// 同步大乐透中奖信息
+performance.getDltList = async function (){
+  let res
+  try {
+    res = await axios.get('https://news.10jqka.com.cn/tapp/news/push/stock/?kid=0&tag=%E5%BC%82%E5%8A%A8&trace=website')
+    if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
+    if(res.data.data.list.length < 1) return
+    let data = res.data.data.list[0]
+    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&type=同花顺新闻`
+    let result = await axios.get(encodeURI(url))
+    if(result.status == 204){
+      await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
+        code: data.id,
+        name: data.title,
+        foreshow_type: '异动',
+        content: data.digest,
+        float: 0,
+        profit: 0,
+        time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+        status: 0,
+        type: '同花顺新闻'
+      })
+    }else{
+      console.log(`不是新数据：【${data.id}】${data.title}`)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = performance

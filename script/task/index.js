@@ -1,4 +1,5 @@
 const stockPerformanceForeshow = require('./stock-performance-foreshow')
+const statistic = require('./statistic')
 const schedule = require('node-schedule')
 const dayjs = require('dayjs')
 let task = {}
@@ -28,6 +29,12 @@ task.init = function init(){
   schedule.scheduleJob('01 * * * * *', () => {
     stockPerformanceForeshow.performanceForecast()
     stockPerformanceForeshow.thsNews()
+  })
+
+  // 每天执行22点执行
+  schedule.scheduleJob('0 0 22 * * *', () => {
+    console.log('执行了大乐透项目')
+    statistic.getDltList()
   })
 }
 

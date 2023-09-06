@@ -32,11 +32,10 @@ task.init = function init(){
   })
 
   // 每天执行22点执行
-  schedule.scheduleJob('1 6 22 * * *', () => {
+  schedule.scheduleJob('1 7 22 * * *', () => {
     console.log('=========dlt')
     statistic.getDltList()
   })
 }
-task.init()
 
 module.exports = task

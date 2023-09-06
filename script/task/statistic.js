@@ -5,7 +5,7 @@ const dayjs = require('dayjs')
 const baseMicroUrl = 'http://101.43.217.166:3000/micro'
 
 // 同步大乐透中奖信息
-performance.getDltList = async function (){
+statistic.getDltList = async function (){
   try {
     // 获取最近10条大乐透数据
     let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=10')

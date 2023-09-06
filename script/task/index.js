@@ -32,8 +32,8 @@ task.init = function init(){
   })
 
   // 每天执行22点执行
-  schedule.scheduleJob('1 5 22 * * *', () => {
-    console.log('执行了大乐透项目')
+  schedule.scheduleJob('1 6 22 * * *', () => {
+    console.log('=========dlt')
     statistic.getDltList()
   })
 }

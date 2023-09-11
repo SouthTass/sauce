@@ -29,37 +29,4 @@ router.get(`/powerball/list`, async (ctx, next) => {
   return res
 })
 
-// 获取双色球匹配度
-router.get(`/powerball/ssq`, async (ctx, next) => {
-  let params = ctx.query
-  if(!params.type) throw new global.customError.ServiceError('彩票类型不能为空')
-  if(!params.number) throw new global.customError.ServiceError('彩票号码不能为空')
-  let arr = ''
-  try {
-    arr = params.number.split(' ')
-  } catch (error) {
-    throw new global.customError.ServiceError('彩票号码有误')
-  }
-  if(arr.length != 7) throw new global.customError.ServiceError('彩票号码有误')
-  let res = await Powerball.getBallList({type: params.type})
-  if(!res) throw new global.customError.ServiceError('服务有误，请稍后再试')
-  if(res.length < 1){
-    ctx.status = 200
-    ctx.body = res
-    return
-  }
-  let result = []
-  res.map(e => {
-    let i = 0
-    arr.map(item => {
-      if(e.ball0 == item) i++
-    })
-    e.conform = i
-    if(e.conform > 0) result.push(e)
-  })
-
-  ctx.status = 200
-  ctx.body = result
-})
-
 module.exports = router

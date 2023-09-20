@@ -69,12 +69,13 @@ router.get(`/powerball/unionlotto`, async (ctx, next) => {
       if(redResult.length < 6) createRedList()
     }
   }
+  createRedList()
   redResult.sort()
   let blueList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16']
   ctx.status = 200
   ctx.body = {
     message: 'ok',
-    data: `${redResult.join(' ')} + ${blueList[(Math.floor(Math.random() * (33 - 1 + 1)) + 1) - 1]}` 
+    data: `${redResult.join(' ')} + ${blueList[(Math.floor(Math.random() * (16 - 1 + 1)) + 1) - 1]}` 
   }
 })
 

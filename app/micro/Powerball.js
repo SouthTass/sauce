@@ -55,6 +55,29 @@ router.get(`/powerball/postzone`, async (ctx, next) => {
   }
 })
 
+router.get(`/powerball/unionlotto`, async (ctx, next) => {
+  let redList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+                 '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24',
+                 '25', '26', '27', '28', '29', '30', '31', '32', '33']
+  let redResult = []
+  let createRedList = () => {
+    let num = Math.floor(Math.random() * (33 - 1 + 1)) + 1
+    if(redResult.find(e => e == num)){
+      createRedList()
+    }else{
+      redResult.push(redList[num - 1])
+      if(redResult.length < 6) createRedList()
+    }
+  }
+  redResult.sort()
+  let blueList = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16']
+  ctx.status = 200
+  ctx.body = {
+    message: 'ok',
+    data: `${redResult.join(' ')} + ${blueList[(Math.floor(Math.random() * (33 - 1 + 1)) + 1) - 1]}` 
+  }
+})
+
 const createPostZone = () => {
   let a = Math.floor(Math.random() * (12 - 1 + 1)) + 1
   let b = Math.floor(Math.random() * (12 - 1 + 1)) + 1

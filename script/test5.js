@@ -1,6 +1,6 @@
 const axios = require('axios')
 let list = []
-const current = ['06', '15', '16', '32', '33', '02', '07']
+const current = ['07', '11', '14', '23', '28', '03', '08']
 async function getWarningFile(){
   let res
   try {
@@ -35,7 +35,7 @@ function autoHandleResult(){
   blueList = blueList.sort((a, b) => {
     return a.count - b.count
   })
-  console.log('大乐透历届红球组及出现的次数：', blueList)
+  console.log('大乐透历届红球组及出现的次数：', blueList.length, blueList)
 }
 
 function autoHandleBlueResult(){

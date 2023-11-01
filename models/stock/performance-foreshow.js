@@ -1,5 +1,5 @@
 const { sequelize } = require('../../core/db')
-const { Sequelize, Model } = require('sequelize')
+const { Sequelize, Model, Op } = require('sequelize')
 
 class PerformanceForeshow extends Model {
   static async addRecord(body){
@@ -25,9 +25,9 @@ class PerformanceForeshow extends Model {
   }
 
   static async getRecordStatus(body){
-    let res = await PerformanceForeshow.findOne({
-      where: body
-    })
+    let where = { status: body.status }
+    if(body.type){where.type = {[Op.in]: body.type.split(',')}}
+    let res = await PerformanceForeshow.findOne({ where })
     if(res){
       return res
     }else{

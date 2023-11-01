@@ -13,8 +13,8 @@ router.post('/add', async (ctx, next) => {
 
 // 查询指定的消息
 router.get('/find', async (ctx, next) => {
-  if(!ctx.query.code) throw new global.customError.ServiceError('股票代码不能为空')
-  if(!ctx.query.type) throw new global.customError.ServiceError('查询类型不能为空')
+  // if(!ctx.query.code) throw new global.customError.ServiceError('股票代码不能为空')
+  // if(!ctx.query.type) throw new global.customError.ServiceError('查询类型不能为空')
   let res = await PerformanceForeshow.getRecord(ctx.query.code, ctx.query.type)
   if(res) ctx.body = res
 })

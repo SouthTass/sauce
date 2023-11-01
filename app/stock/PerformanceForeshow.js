@@ -21,7 +21,7 @@ router.get('/find', async (ctx, next) => {
 
 // 查询指定的消息
 router.get('/status', async (ctx, next) => {
-  let res = await PerformanceForeshow.getRecordStatus({status: ctx.query.status, type: ctx.query.type})
+  let res = await PerformanceForeshow.getRecordStatus(ctx.query)
   if(res) ctx.body = res
 })
 

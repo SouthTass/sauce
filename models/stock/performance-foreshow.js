@@ -25,8 +25,8 @@ class PerformanceForeshow extends Model {
   }
 
   static async getRecordStatus(body){
-    let where = { status: body.status }
-    if(body.type){where.type = {[Op.in]: body.type.split(',')}}
+    let where = body
+    if(body.type) where.type = {[Op.in]: body.type.split(',')} 
     let res = await PerformanceForeshow.findOne({ where })
     if(res){
       return res

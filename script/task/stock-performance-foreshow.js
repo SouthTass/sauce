@@ -94,6 +94,40 @@ performance.thsNews = async function (){
   }
 }
 
+// 查询财联社研报
+performance.ResearchReport = async function (){
+  let time = dayjs().unix()
+  let res
+  try {
+    res = await axios.get(`https://api3.cls.cn/v1/roll/get_roll_list?app=cailianpress&category=announcement&channel=0&cuid=1245D9CE-CA9A-4A94-A900-1F30DB4A3409&last_time=${time}&mb=iPhone11%2C8&net=1&os=ios&ov=15.2&platform=iphone&province_code=1101&refresh_type=1&rn=20&sign=39da8f79d9ac755191bae38b092bbaeb&sv=8.2.5`)
+    if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
+    if(res.data.data.roll_data.length < 1) return
+    let data = res.data.data.roll_data[0]
+    let content = data.content
+    let pattern = /机构调研/
+    if(!pattern.test(content)) return 
+    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&type=财联社`
+    let result = await axios.get(encodeURI(url))
+    if(result.status == 204){
+      await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
+        code: data.id,
+        name: data.title,
+        foreshow_type: '研报',
+        content: data.content,
+        float: 0,
+        profit: 0,
+        time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+        status: 0,
+        type: '财联社'
+      })
+    }else{
+      console.log(`不是新数据：【${data.id}】${data.title}`)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // 同步大乐透中奖信息
 performance.getDltList = async function (){
   let res

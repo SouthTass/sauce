@@ -106,7 +106,7 @@ performance.ResearchReport = async function (){
     let content = data.content
     let pattern = /机构调研/
     if(!pattern.test(content)) return 
-    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&type=研报`
+    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&foreshow_type=研报`
     let result = await axios.get(encodeURI(url))
     if(result.status == 204){
       await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {

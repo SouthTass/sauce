@@ -100,7 +100,8 @@ performance.ResearchReport = async function (){
   let res
   try {
     res = await axios.get(`https://api3.cls.cn/v1/roll/get_roll_list?app=cailianpress&category=announcement&channel=0&cuid=1245D9CE-CA9A-4A94-A900-1F30DB4A3409&last_time=${time}&mb=iPhone11%2C8&net=1&os=ios&ov=15.2&platform=iphone&province_code=1101&refresh_type=1&rn=20&sign=39da8f79d9ac755191bae38b092bbaeb&sv=8.2.5`)
-    if(res.status == 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
+    console.log(res.status)
+    if(res.status != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
     if(res.data.data.roll_data.length < 1) return
     let data = res.data.data.roll_data[0]
     let content = data.content

@@ -8,6 +8,7 @@ class InitManager{
     InitManager.importGlobalError()
     InitManager.loadConfig()
     if(process.env.USER != 'wzt') InitManager.timedTask()
+    // InitManager.timedTask()
   }
 
   static loadConfig(path = ''){

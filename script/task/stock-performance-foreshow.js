@@ -125,7 +125,7 @@ performance.ResearchReport = async function (){
       console.log(`不是新数据：【${data.id}】${data.title}`)
     }
   } catch (error) {
-    console.log(error)
+    console.log('查询研报错误：', error)
   }
 }
 

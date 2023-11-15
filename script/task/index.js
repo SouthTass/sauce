@@ -29,7 +29,6 @@ task.init = function init(){
   schedule.scheduleJob('01 * * * * *', () => {
     stockPerformanceForeshow.performanceForecast()
     stockPerformanceForeshow.thsNews()
-    stockPerformanceForeshow.ResearchReport()
   })
 
   // 每天执行22点执行

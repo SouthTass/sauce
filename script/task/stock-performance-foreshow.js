@@ -103,9 +103,10 @@ performance.ResearchReport = async function (){
     if(res.status != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
     if(res.data.data.roll_data.length < 1) return
     let data = res.data.data.roll_data[0]
+    let title = data.title
     let content = data.content
     let pattern = /机构调研/
-    if(!pattern.test(content)) return console.log('不是研报：', data.title, data.content)
+    if(!pattern.test(title) && !pattern.test(content)) return console.log('不是研报：', '标题：' + data.title, '内容：' + data.content)
     let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&foreshow_type=研报`
     let result = await axios.get(encodeURI(url))
     if(result.status == 204){

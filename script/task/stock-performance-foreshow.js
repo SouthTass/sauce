@@ -105,7 +105,7 @@ performance.ResearchReport = async function (){
     let data = res.data.data.roll_data[0]
     let title = data.title
     let content = data.content
-    let pattern = /机构调研|欧元区2023年/
+    let pattern = /机构调研|财联社11月15日电/
     if(!pattern.test(title) && !pattern.test(content)) return console.log('不是研报：', '标题：' + data.title, '内容：' + data.content)
     let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&foreshow_type=研报`
     let result = await axios.get(encodeURI(url))

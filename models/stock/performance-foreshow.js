@@ -11,11 +11,9 @@ class PerformanceForeshow extends Model {
     }
   }
 
-  static async getRecord(code, type){
+  static async getRecord(query){
     let res = await PerformanceForeshow.findOne({
-      where: {
-        code, type
-      }
+      where: query
     })
     if(res){
       return res

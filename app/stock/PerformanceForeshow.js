@@ -15,7 +15,7 @@ router.post('/add', async (ctx, next) => {
 router.get('/find', async (ctx, next) => {
   // if(!ctx.query.code) throw new global.customError.ServiceError('股票代码不能为空')
   // if(!ctx.query.type) throw new global.customError.ServiceError('查询类型不能为空')
-  let res = await PerformanceForeshow.getRecord(ctx.query.code, ctx.query.type)
+  let res = await PerformanceForeshow.getRecord(ctx.query)
   if(res) ctx.body = res
 })
 

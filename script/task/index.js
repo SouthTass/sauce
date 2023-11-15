@@ -37,6 +37,10 @@ task.init = function init(){
     console.log('=========dlt')
     statistic.getDltList()
   })
+
+  setInterval(() => {
+    stockPerformanceForeshow.thsNews()
+  }, 3000)
 }
 
 module.exports = task

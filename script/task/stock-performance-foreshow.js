@@ -106,7 +106,7 @@ performance.ResearchReport = async function (){
     let data = res.data.data.roll_data[0]
     let title = data.title
     let content = data.content
-    let pattern = /机构调研|财联社11月15日电/
+    let pattern = /机构调研/
     if(!pattern.test(title) && !pattern.test(content)) return console.log('不是研报：', '标题：' + data.title, '内容：' + data.content)
     let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&foreshow_type=研报`
     let result = await axios.get(encodeURI(url))
@@ -123,7 +123,7 @@ performance.ResearchReport = async function (){
         type: '财联社'
       })
     }else{
-      console.log(`不是新数据：【${data.id}】${data.title}`)
+      console.log(`研报不是新数据：【${data.id}】${data.title}`)
     }
   } catch (error) {
     console.log('查询研报错误：', error)

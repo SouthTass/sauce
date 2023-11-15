@@ -39,7 +39,7 @@ task.init = function init(){
   })
 
   setInterval(() => {
-    stockPerformanceForeshow.thsNews()
+    stockPerformanceForeshow.ResearchReport()
   }, 3000)
 }
 

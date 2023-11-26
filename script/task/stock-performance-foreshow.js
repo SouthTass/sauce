@@ -7,7 +7,7 @@ const baseUrl = 'http://101.43.217.166:3000'
 performance.performanceForecast = async function (){
   let res
   try {
-    res = await axios.get('https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=5&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272023-09-30%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
+    res = await axios.get('https://datacenter-web.eastmoney.com/api/data/v1/get?sortColumns=NOTICE_DATE%2CSECURITY_CODE&sortTypes=-1%2C-1&pageSize=5&pageNumber=1&reportName=RPT_PUBLIC_OP_NEWPREDICT&columns=ALL&filter=(REPORT_DATE%3D%272023-12-31%27)(PREDICT_FINANCE_CODE%3D%22005%22)')
     if(!res?.data?.result?.data) return
     let tmpList = res.data.result.data
     let list = []
@@ -21,7 +21,7 @@ performance.performanceForecast = async function (){
         profit: 0,
         time: e.NOTICE_DATE,
         status: 0,
-        type: '2023年三季报'
+        type: '2023年年报'
       }
       list.push(item)
     })

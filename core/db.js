@@ -13,6 +13,11 @@ const sequelize = new SequeLize(dbname, user, pwd, {
   port,
   logging: false,
   timezone: '+08:00',
+  pool: {
+    max: 50,
+    min: 0,
+    idle: 10000
+  },
   define: {
     paranoid: true,
     underscored: true,

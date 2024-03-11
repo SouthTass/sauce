@@ -20,7 +20,6 @@ const exportFiles = async () => {
     list[0].data[i].push(res[i].tel)
     list[0].data[i].push(res[i].address)
   }
-  console.log(list)
 
   const buffer = xlsx.build(list)
   fs.writeFile("testFile.xlsx", buffer, function (err) {

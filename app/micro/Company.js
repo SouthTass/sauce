@@ -7,7 +7,7 @@ const router = new Router({
 
 router.post('/company/add', async (ctx, next) => {
   let body = ctx.request.body
-  await Company.saveBall(body)
+  await Company.createItem(body)
   ctx.status = 200
   ctx.body = {
     message: 'ok',
@@ -15,16 +15,15 @@ router.post('/company/add', async (ctx, next) => {
   }
 })
 
-// router.get(`/powerball/list`, async (ctx, next) => {
-//   let params = ctx.query
-//   if(!params.type) throw new global.customError.ServiceError('彩票类型不能为空')
-//   let res = await Powerball.getBallList(params)
-//   ctx.status = 200
-//   ctx.body = {
-//     message: 'ok',
-//     list: res
-//   }
-//   return res
-// })
+router.get(`/company/list`, async (ctx, next) => {
+  let params = ctx.query
+  let res = await Company.getList(params)
+  ctx.status = 200
+  ctx.body = {
+    message: 'ok',
+    list: res
+  }
+  return res
+})
 
 module.exports = router

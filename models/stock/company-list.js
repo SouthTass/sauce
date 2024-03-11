@@ -1,21 +1,17 @@
 const { sequelize } = require('../../core/db')
 const { Sequelize, Model } = require('sequelize')
 
-class MainService extends Model {
+class Main extends Model {
   static async createItem(body){
-    try {
-      return await MainService.bulkCreate(body)
-    } catch (error) {
-      console.log(error)
-    }
+    // return await Main.create(body[0])
   }
 
-  static async getList(params){
-    return await MainService.findAll({where: params})
-  }
+  // static async getList(params){
+  //   return await Main.findAll({where: params})
+  // }
 }
 
-MainService.init({
+Main.init({
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -26,10 +22,10 @@ MainService.init({
   address: Sequelize.STRING,
 }, {
     sequelize,
-    tableName: 'company'
+    tableName: 'company_list'
   }
 )
 
 module.exports = {
-  'Company': MainService
+  Company: Main
 }

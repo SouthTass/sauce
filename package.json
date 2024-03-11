@@ -21,9 +21,11 @@
     "koa-router": "^10.0.0",
     "mysql2": "^2.2.5",
     "node-schedule": "^2.1.1",
+    "node-xlsx": "^0.23.0",
     "redis": "^4.6.5",
     "require-directory": "^2.1.1",
     "sequelize": "^6.6.2",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "xlsx": "^0.18.5"
   }
 }

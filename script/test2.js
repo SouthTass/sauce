@@ -1,30 +1,35 @@
-const fs = require('fs')
+const xlsx = require("node-xlsx")
+const fs = require("fs")
 const axios = require('axios')
-const dayjs = require('dayjs')
 
-async function writeRecord(){
-  let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=100000')
-  // let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=3')
-  if(res.status != 200) return console.log('程序出错')
-  fs.writeFileSync(`${process.cwd()}/temp/dlt.json`, JSON.stringify(res.data.value.list))
-  console.log('存储成功')
+
+const getList = async () => {
+  let res = await axios.get(`http://localhost:3000/micro/company/list`)
+  return res.data.list
 }
-// writeRecord()
 
-
-async function readRecord(){
-  let list = JSON.parse(fs.readFileSync(`${process.cwd()}/temp/dlt.json`, 'utf8'))
-  for(let i = 0; i < list.length; i++){
-    let num = list[i].lotteryDrawResult.split(' ')
-    let body = {
-      type: '大乐透',
-      code: list[i].lotteryDrawNum,
-      open_prize_date: list[i].lotterySaleEndtime
-    }
-    for(let m = 0; m < 7; m++){
-      body[`ball${m}`] = num[m]
-    }
-    await axios.post('http://101.43.217.166:3000/micro/powerball/add', body)
+const exportFiles = async () => {
+  let res = await getList()
+  let list = [{
+    name: 'sheet',
+    data: []
+  }]
+  for(let i = 0; i < res.length; i++){
+    list[0].data[i] = []
+    list[0].data[i].push(res[i].name)
+    list[0].data[i].push(res[i].tel)
+    list[0].data[i].push(res[i].address)
   }
+  console.log(list)
+
+  const buffer = xlsx.build(list)
+  fs.writeFile("testFile.xlsx", buffer, function (err) {
+    if (err) {
+      console.log(err, "保存excel出错");
+    } else {
+      console.log("写入excel成功!!!");
+    }
+  })
 }
-readRecord()
+
+exportFiles()

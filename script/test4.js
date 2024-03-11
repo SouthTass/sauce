@@ -1,20 +1,27 @@
-const axios = require('axios')
-const dayjs = require('dayjs')
-let num = 0
-async function getWarningFile(){
-  let time = dayjs().unix()
-  try {
-    res = await axios.get(`https://api3.cls.cn/v1/roll/get_roll_list?app=cailianpress&category=announcement&channel=0&cuid=1245D9CE-CA9A-4A94-A900-1F30DB4A3409&last_time=${time}&mb=iPhone11%2C8&net=1&os=ios&ov=15.2&platform=iphone&province_code=1101&refresh_type=1&rn=20&sign=39da8f79d9ac755191bae38b092bbaeb&sv=8.2.5`)
-    let content = res.data.data.roll_data[0].content
-    let pattern = /机构调研/
-    if(pattern.test(content)){
-      
-    }
-  } catch (error) {
-    return console.log('调用出错:', JSON.stringify(error))
-  }
-}
+// const axios = require('axios')
+// const dayjs = require('dayjs')
+// let num = 0
+// async function getWarningFile(){
+//   let time = dayjs().unix()
+//   try {
+//     res = await axios.get(`https://stock.gtimg.cn/data/index.php?appn=detail&action=data&c=sh600418&p=42`)
+//     let result = (JSON.parse(res.data.replace('v_detail_data_sh600418=', '')))[1]
+//     console.log(result.split('|'))
+//   } catch (error) {
+//     return console.log('调用出错:', JSON.stringify(error))
+//   }
+// }
 
-setInterval(() => {
-  getWarningFile()
-}, 2000)
+// getWarningFile()
+
+// // setInterval(() => {
+// //   getWarningFile()
+// // }, 2000)
+let res = { data: { data: '11 12 13 15 30 32 + 03'}}
+let type = 'bet'
+let result = res.data.data
+if(type == 'bet'){
+  let arr = result.split(' ')
+  result = `s${arr[0]}${arr[1]}${arr[2]}${arr[3]}${arr[4]}${arr[5]}+${arr[7]}`
+  console.log(result)
+}

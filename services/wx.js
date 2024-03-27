@@ -16,7 +16,6 @@ class WXManager{
       throw new global.customError.ServiceError(`openid获取失败：${res.data.errcode}--${res.data.errmsg}`)
     }
     let user = await User.getUserByOpenid(res.data.openid)
-    console.log(300, user)
     if(!user){
       user = await User.regiterUserByOpenid(res.data.openid)
     }

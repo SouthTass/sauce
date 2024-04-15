@@ -33,7 +33,7 @@ MainFunction.init({
   },
   code: Sequelize.STRING,
   name: Sequelize.STRING,
-  length: Sequelize.STRING
+  height: Sequelize.STRING
 }, {
   sequelize, tableName: 'stock_board_ladder'
 })

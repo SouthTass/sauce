@@ -35,6 +35,12 @@ task.init = function init(){
     statistic.getDltList()
   })
 
+  // 每天执行15点10分执行
+  schedule.scheduleJob('1 10 15 * * *', () => {
+    console.log('获取连板天梯数据')
+    statistic.getBoardLadder()
+  })
+
   setInterval(() => {
     
   }, 3000)

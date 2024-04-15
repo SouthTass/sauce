@@ -1,7 +1,6 @@
-const stockPerformanceForeshow = require('./stock-performance-foreshow')
 const statistic = require('./statistic')
 const schedule = require('node-schedule')
-const dayjs = require('dayjs')
+
 let task = {}
 //其他规则见 https://www.npmjs.com/package/node-schedule
 //规则参数讲解    *代表通配符
@@ -27,18 +26,17 @@ task.init = function init(){
 
   // 每分钟的第一秒执行
   schedule.scheduleJob('01 * * * * *', () => {
-    stockPerformanceForeshow.performanceForecast()
-    stockPerformanceForeshow.thsNews()
+    
   })
 
   // 每天执行22点执行
   schedule.scheduleJob('1 7 22 * * *', () => {
-    console.log('=========dlt')
+    console.log('获取大乐透数据')
     statistic.getDltList()
   })
 
   setInterval(() => {
-    stockPerformanceForeshow.ResearchReport()
+    
   }, 3000)
 }
 

@@ -46,22 +46,22 @@ class MainFunction extends Model {
   }
 }
 
-MainFunction.init({
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  code: Sequelize.STRING,
-  name: Sequelize.STRING,
-  price: Sequelize.STRING,
-  day_total_price: Sequelize.STRING,
-  time: Sequelize.STRING,
-}, {
-  sequelize, tableName: 'stock_time_price'
-}, {
-  indexes: [{unique: true, fields: ['code']}]},
-)
+// MainFunction.init({
+//   id: {
+//     type: Sequelize.INTEGER,
+//     primaryKey: true,
+//     autoIncrement: true
+//   },
+//   code: Sequelize.STRING,
+//   name: Sequelize.STRING,
+//   price: Sequelize.STRING,
+//   day_total_price: Sequelize.STRING,
+//   time: Sequelize.STRING,
+// }, {
+//   sequelize, tableName: 'stock_time_price'
+// }, {
+//   indexes: [{unique: true, fields: ['code']}]},
+// )
 
 module.exports = {
   'StockTimePrice': MainFunction

@@ -1,27 +1,43 @@
-// const axios = require('axios')
-// const dayjs = require('dayjs')
-// let num = 0
-// async function getWarningFile(){
-//   let time = dayjs().unix()
-//   try {
-//     res = await axios.get(`https://stock.gtimg.cn/data/index.php?appn=detail&action=data&c=sh600418&p=42`)
-//     let result = (JSON.parse(res.data.replace('v_detail_data_sh600418=', '')))[1]
-//     console.log(result.split('|'))
-//   } catch (error) {
-//     return console.log('调用出错:', JSON.stringify(error))
-//   }
-// }
+const axios = require('axios')
+const https = require('https')
 
-// getWarningFile()
-
-// // setInterval(() => {
-// //   getWarningFile()
-// // }, 2000)
-let res = { data: { data: '11 12 13 15 30 32 + 03'}}
-let type = 'bet'
-let result = res.data.data
-if(type == 'bet'){
-  let arr = result.split(' ')
-  result = `s${arr[0]}${arr[1]}${arr[2]}${arr[3]}${arr[4]}${arr[5]}+${arr[7]}`
-  console.log(result)
-}
+let list = []
+ 
+// 创建一个保持连接开启的 axios 实例
+const axiosInstance = axios.create({
+  // httpAgent: new http.Agent({ keepAlive: true }),
+  httpsAgent: new https.Agent({ keepAlive: true }),
+})
+ 
+// 调用返回 text/event-stream 类型响应的 API
+const streamResponse = axiosInstance.get('https://11.futsseapi.eastmoney.com/sse/114_jdm_mx/?token=1101ffec61617c99be287c1bec3085ff', {
+  responseType: 'stream', // 设置响应类型为流
+})
+ 
+streamResponse.then(response => {
+  const res = response.data;
+ 
+  // 处理服务器推送的事件
+  res.on('data', (chunk) => {
+    const buffer = Buffer.from(chunk)
+    const jsonString = buffer.toString().trim()
+    if(jsonString){
+      console.log(jsonString)
+    }else{
+      console.log(1)
+    }
+    // 
+    // if(jsonString){
+    //   jsonObject = JSON.parse(jsonString)
+    //   console.log(jsonObject)
+    // }
+  })
+ 
+  res.on('error', (error) => {
+    console.error('Stream error:', error)
+  })
+ 
+  res.on('end', () => {
+    console.log('Stream ended.')
+  })
+})

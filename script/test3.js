@@ -1,7 +1,26 @@
 const axios = require('axios')
+const dayjs = require('dayjs')
 
 async function writeRecord(){
-  let res = await axios.get('http://vweixinf.tc.qq.com/110/20401/stodownload?m=f2e2ea6c61ce2d06e90da157c243b92b&filekey=3043020101042f302d02016e04025348042066326532656136633631636532643036653930646131353763323433623932620202339f040d00000004627466730000000131&hy=SH&storeid=323032313037313431323235323030303031636362616131626536373163373536366234306230303030303036653031303034666231&ef=1&bizid=1022')
-  console.log(res.data)
+  let res = await axios({
+    method: 'get',
+    url: 'https://data.10jqka.com.cn/dataapi/limit_up/continuous_limit_up?filter=HS,GEM2STAR&date=20240411',
+  })
+  if(res.status != 0){
+    await msg.say(`调用接口出错，状态码：${res.status}`)
+    return
+  }
+  if(res.data.status_code != 0){
+    await msg.say(`数据出错，状态码：${res.status}`)
+    return
+  }
+  let result = [`当前连板天梯`]
+  res.data.data.forEach(e => {
+    let a = []
+    e.code_list.forEach(item => a.push(item.name))
+    result.push(`${e.height}板：${a.join('、')}`)
+  })
+
+  console.log(result.join('\n'))
 }
 writeRecord()

@@ -1,6 +1,5 @@
 const { sequelize } = require('../../core/db')
 const { Sequelize, Model, Op } = require('sequelize')
-const dayjs = require('dayjs')
 
 class MainFunction extends Model {
   static async addOneItem(body){
@@ -14,8 +13,12 @@ class MainFunction extends Model {
 
   static async getList(params){
     try {
-      let res = await MainFunction.findOne({
-        where: params
+      let query = JSON.parse(JSON.stringify(params))
+      delete query.page_size
+      let res = await MainFunction.findAll({
+        where: query,
+        order: [['time', 'DESC']],
+        limit: Number(params.page_size)
       })
       if(res) return res
       return []

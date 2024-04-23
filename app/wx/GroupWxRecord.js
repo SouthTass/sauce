@@ -2,7 +2,7 @@ const dayjs = require('dayjs')
 const { GroupWxRecord } = require('../../models/wx/GroupWxRecord')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/wx'
+  prefix: '/api/wx'
 })
 
 router.post('/group/record', async (ctx, next) => {

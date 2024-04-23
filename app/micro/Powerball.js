@@ -2,7 +2,7 @@ const dayjs = require('dayjs')
 const { Powerball } = require('../../models/micro/Powerball')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/micro'
+  prefix: '/api/micro'
 })
 
 router.post('/powerball/add', async (ctx, next) => {

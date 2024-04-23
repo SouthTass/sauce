@@ -1,7 +1,7 @@
 const { BuyAndSell } = require('../../models/stock/group')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/stock/buy'
+  prefix: '/api/stock/buy'
 })
 
 // 添加组合

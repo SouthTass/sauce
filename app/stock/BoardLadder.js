@@ -1,7 +1,7 @@
 const { StockBoardLadder } = require('../../models/stock/board-ladder')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/stock/board-ladder'
+  prefix: '/api/stock/board-ladder'
 })
 
 // 添加条目

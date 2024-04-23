@@ -1,7 +1,7 @@
 const { PerformanceForeshow } = require('../../models/stock/performance-foreshow')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/stock/performance/foreshow'
+  prefix: '/api/stock/performance/foreshow'
 })
 
 // 数据库中添加消息

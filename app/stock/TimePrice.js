@@ -1,7 +1,7 @@
 const { StockTimePrice } = require('../../models/stock/time-price')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/stock/timeprice'
+  prefix: '/api/stock/timeprice'
 })
 
 // 添加今日价格

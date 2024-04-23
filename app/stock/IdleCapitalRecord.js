@@ -2,7 +2,7 @@ const { IdleCapitalRecord } = require('../../models/stock/idle-capital-record')
 const Router = require('koa-router')
 const dayjs = require('dayjs')
 const router = new Router({
-  prefix: '/stock/idlecapital'
+  prefix: '/api/stock/idlecapital'
 })
 
 // 查找数据库中有无该消息

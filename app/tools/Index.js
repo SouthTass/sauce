@@ -1,7 +1,7 @@
 const dayjs = require('dayjs')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/tools'
+  prefix: '/api/tools'
 })
 
 // 获取服务器当前时间

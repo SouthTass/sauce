@@ -1,7 +1,7 @@
 const { Group } = require('../../models/stock/group')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/stock/group'
+  prefix: '/api/stock/group'
 })
 
 // 添加组合

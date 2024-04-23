@@ -2,7 +2,7 @@ const { default: axios } = require('axios')
 const { AccessTokenManager } = require('../../services/thsServices')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/futures'
+  prefix: '/api/futures'
 })
 
 router.post('/market', async (ctx, next) => {

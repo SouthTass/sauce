@@ -2,7 +2,7 @@ const dayjs = require('dayjs')
 const { Company } = require('../../models/micro/Company')
 const Router = require('koa-router')
 const router = new Router({
-  prefix: '/micro'
+  prefix: '/api/micro'
 })
 
 router.post('/company/add', async (ctx, next) => {

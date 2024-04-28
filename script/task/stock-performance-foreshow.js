@@ -26,10 +26,10 @@ performance.performanceForecast = async function (){
       list.push(item)
     })
     for(let i = 0; i < list.length; i++){
-      let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`
+      let url = `http://127.0.0.1:3000/api/stock/performance/foreshow/find?code=${list[i].code}&type=${list[i].type}`
       let res = await axios.get(encodeURI(url))
       if(res.status == 204){
-        let a = await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', list[i])
+        let a = await axios.post('http://127.0.0.1:3000/api/stock/performance/foreshow/add', list[i])
         console.log(a)
       }else{
         console.log(`【${list[i].code} ${list[i].name}】不是新数据`)
@@ -53,7 +53,7 @@ performance.performanceTimeDayPrice = async function (){
       let result = item.split('~')
       if(result[37]) money += Number(result[37])
     })
-    await axios.post(`https://sauce.cocosnet.cn/stock/timeprice/add`, {
+    await axios.post(`https://sauce.cocosnet.cn/api/stock/timeprice/add`, {
       code: 'sh999999',
       name: 'A股大盘',
       price: '0.00',
@@ -73,10 +73,10 @@ performance.thsNews = async function (){
     if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
     if(res.data.data.list.length < 1) return
     let data = res.data.data.list[0]
-    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&type=同花顺新闻`
+    let url = `http://127.0.0.1:3000/api/stock/performance/foreshow/find?code=${data.id}&type=同花顺新闻`
     let result = await axios.get(encodeURI(url))
     if(result.status == 204){
-      await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
+      await axios.post('http://127.0.0.1:3000/api/stock/performance/foreshow/add', {
         code: data.id,
         name: data.title,
         foreshow_type: '异动',
@@ -107,10 +107,10 @@ performance.ResearchReport = async function (){
     let content = data.content
     let pattern = /机构调研/
     if(!pattern.test(content)) return console.log('不是研报：', '标题：' + data.title, '内容：' + data.content)
-    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&foreshow_type=研报`
+    let url = `http://127.0.0.1:3000/api/stock/performance/foreshow/find?code=${data.id}&foreshow_type=研报`
     let result = await axios.get(encodeURI(url))
     if(result.status == 204){
-      await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
+      await axios.post('http://127.0.0.1:3000/api/stock/performance/foreshow/add', {
         code: data.id,
         name: data.title,
         foreshow_type: '研报',
@@ -137,10 +137,10 @@ performance.getDltList = async function (){
     if(res.status == 200 && res.data.code != 200) return console.log(`${dayjs().format('YYYY-MM-DD HH:mm:ss')}查询数据返回错误结果`)
     if(res.data.data.list.length < 1) return
     let data = res.data.data.list[0]
-    let url = `http://127.0.0.1:3000/stock/performance/foreshow/find?code=${data.id}&type=同花顺新闻`
+    let url = `http://127.0.0.1:3000/api/stock/performance/foreshow/find?code=${data.id}&type=同花顺新闻`
     let result = await axios.get(encodeURI(url))
     if(result.status == 204){
-      await axios.post('http://127.0.0.1:3000/stock/performance/foreshow/add', {
+      await axios.post('http://127.0.0.1:3000/api/stock/performance/foreshow/add', {
         code: data.id,
         name: data.title,
         foreshow_type: '异动',

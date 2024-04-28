@@ -75,7 +75,7 @@ for(let i = 0; i < result.length; i++){
 
 async function writeRecord(){
   for(let i = 0; i < record.length; i++){
-    await axios.post('http://sauce.coconer.cn/stock/idlecapital/add', record[i])
+    await axios.post('http://sauce.coconer.cn/api/stock/idlecapital/add', record[i])
   }
 }
 writeRecord()

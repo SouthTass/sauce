@@ -25,6 +25,6 @@ async function getList(index){
     })
   })
   console.log(i)
-  await axios.post(`http://localhost:3000/micro/company/add`, list)
+  await axios.post(`http://localhost:3000/api/micro/company/add`, list)
 }
 })()

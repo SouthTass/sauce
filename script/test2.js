@@ -4,7 +4,7 @@ const axios = require('axios')
 
 
 const getList = async () => {
-  let res = await axios.get(`http://localhost:3000/micro/company/list`)
+  let res = await axios.get(`http://localhost:3000/api/micro/company/list`)
   return res.data.list
 }
 

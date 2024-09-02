@@ -81,7 +81,9 @@ class GroupWxRecord extends Model {
       },
       order: [[ 'created_at', 'DESC' ]]
     })
-    if(!list) throw new global.customError.ServiceError('暂无记录')
+    if(!list){
+      return []
+    }
     return list
   }
 }

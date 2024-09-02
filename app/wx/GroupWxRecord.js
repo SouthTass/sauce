@@ -45,4 +45,13 @@ router.get('/chat/user/123', async (ctx, next) => {
   let res = await GroupWxRecord.getChatUserXi()
 })
 
+router.get('/chat/record/first', async (ctx, next) => {
+  let res = await GroupWxRecord.getFirstChatRecord(ctx.query)
+  if(!res) throw new global.customError.ServiceError('暂无数据')
+  ctx.status = 200
+  ctx.body = res
+})
+
+
+
 module.exports = router

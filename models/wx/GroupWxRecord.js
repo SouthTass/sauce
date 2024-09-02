@@ -10,13 +10,14 @@ class GroupWxRecord extends Model {
 
   static async getChatNum(){
     let list = await GroupWxRecord.count({
-      where: {
-        room: '4000'
-      },
       attributes: ['from_name'],
-      group: 'from_name'
+      group: 'from_name',
+      where: {
+        'room_id': '39062224312@chatroom'
+      }
     })
     if(!list) throw new global.customError.ServiceError('暂无记录')
+    console.log(list.sort((a, b) => b.count - a.count))
     return list
   }
 
@@ -49,7 +50,6 @@ class GroupWxRecord extends Model {
     return list
   }
 
-
   static async getChatUserXi(room){
     let list = await GroupWxRecord.findAll({
       // where: {
@@ -72,6 +72,17 @@ class GroupWxRecord extends Model {
       console.log('成功')
       if(i + 1 >= num) console.log('结束')
     }
+  }
+
+  static async getFirstChatRecord(params){
+    let list = await GroupWxRecord.findOne({
+      where: {
+        ...params
+      },
+      order: [[ 'created_at', 'DESC' ]]
+    })
+    if(!list) throw new global.customError.ServiceError('暂无记录')
+    return list
   }
 }
 

@@ -8,7 +8,7 @@ const router = new Router({
 router.post('/group/record', async (ctx, next) => {
   let body = ctx.request.body
   if(!body.content) throw new global.customError.ServiceError('内容不能为空')
-  await GroupWxRecord.saveRecord(body.room, body.name, body.content, body.wxid, body.type, body.room_id)
+  await GroupWxRecord.saveRecord(body.room, body.name, body.content, body.wxid, body.type, body.record_at, body.room_id)
   ctx.status = 200
   ctx.body = {
     message: 'ok',

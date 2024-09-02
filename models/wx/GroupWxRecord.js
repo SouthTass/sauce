@@ -2,9 +2,9 @@ const { sequelize } = require('../../core/db')
 const { Sequelize, Model, Op } = require('sequelize')
 
 class GroupWxRecord extends Model {
-  static async saveRecord(room, from_name, content, wxid, type, room_id){
+  static async saveRecord(room, from_name, content, wxid, type, record_at, room_id){
     return await GroupWxRecord.create({
-      room, from_name, content, wxid, type, room_id: room_id || ''
+      room, from_name, content, wxid, type, record_at, room_id: room_id || ''
     })
   }
 
@@ -99,7 +99,8 @@ GroupWxRecord.init({
   content: Sequelize.TEXT,
   from_name: Sequelize.STRING,
   wxid: Sequelize.STRING,
-  type: Sequelize.STRING
+  type: Sequelize.STRING,
+  room_id: Sequelize.STRING
 }, {
     sequelize,
     tableName: 'group_wx_record'

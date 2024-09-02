@@ -100,7 +100,7 @@ GroupWxRecord.init({
   from_name: Sequelize.STRING,
   wxid: Sequelize.STRING,
   type: Sequelize.STRING,
-  room_id: Sequelize.STRING
+  room_at: Sequelize.STRING
 }, {
     sequelize,
     tableName: 'group_wx_record'

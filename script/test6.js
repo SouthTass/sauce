@@ -1,33 +1,25 @@
-const fs = require("fs")
-var echarts = require('echarts');
-const { createCanvas } = require('canvas');
+async function forwardMessageToParticularUserAndGroup(message, text, bot){
+  let checkUserList = [
+    { name: '山顶动人', id: 'out-man1992'},
+    { name: '远大师', id: 'wxid_y9sdsrm8yw9a22'},
+    { name: 'mary姐', id: 'wxid_91mpeutpvaeh12'},
+    { name: '一梦', id: 'zhangming6877'},
+    { name: '期货', id: '25984984104824210@openim'}]
 
-const canvas = createCanvas(800, 600);
-let chart = echarts.init(canvas);
+  let keywordsList = ['碳酸锂', '鸡蛋', '苯乙烯', '豆油', '油脂']
+  let sendUserList = ['woxinfeixiangdeg']
 
-chart.setOption({
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line'
+  let userIndex = 3
+
+  for(let i = 0; i < sendUserList.length; i++){
+    if(checkUserList[userIndex].name == '期货'){
+      if(keywordsList.some(e => text.includes(e))) {
+        console.log(1)
+      }
+    }else{
+      console.log(2)
     }
-  ]
-});
-
-const buffer = canvas.toBuffer('image/png')
-
-
-fs.writeFile("testFile.png", buffer, function (err) {
-  if (err) {
-    console.log(err, "保存excel出错");
-  } else {
-    console.log("写入excel成功!!!");
   }
-})
+}
+
+forwardMessageToParticularUserAndGroup({}, '碳酸的价格', {})

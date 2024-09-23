@@ -64,6 +64,29 @@ class Main extends Model {
       throw new global.customError.EmptyData()
     }
   }
+
+  static async clearRepetitionGroup(){
+    let list = await Main.findAll({
+      attributes: ['key_word', [sequelize.fn('COUNT', sequelize.col('key_word')), 'count']],
+      group: ['key_word']
+    })
+    // list.sort((a, b) => b.dataValues.count - a.dataValues.count )
+    // if(!list) throw new global.customError.EmptyData()
+    // for(let i = 0; i < list.length; i++){
+    //   // if(list[i].dataValues.count < 2) continue
+    //   // let tmp = await Main.findAll({ where: { key_word: list[i].dataValues.key_word}})
+    //   // tmp.slice(1, tmp.length - 1)
+    //   // let arr = []
+    //   // tmp.map(e => arr.push(e.id))
+    //   // console.log(arr)
+    //   // await Main.destroy({
+    //   //   where: {
+    //   //     id: arr
+    //   //   }
+    //   // })
+    // }
+    return list
+  }
 }
 
 Main.init({

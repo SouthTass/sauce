@@ -24,4 +24,10 @@ router.get('/find', async (ctx, next) => {
   if(res) ctx.body = res
 })
 
+// 清除重复数据
+router.get('/clear', async (ctx, next) => {
+  let res = await Group.clearRepetitionGroup()
+  if(res) ctx.body = res
+})
+
 module.exports = router

@@ -34,7 +34,7 @@ async function createItem(){
     for(let m = 0; m < res.length; m++){
       await axios({
         method: 'post',
-        url: `http://101.43.217.166:3000/api/stock/board-ladder/add`,
+        url: `http://localhost:3000/api/stock/board-ladder/add`,
         data: res[m]
       })
     }

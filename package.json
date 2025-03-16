@@ -13,7 +13,6 @@
     "basic-auth": "^2.0.1",
     "bcryptjs": "^2.4.3",
     "cd": "^0.3.3",
-    "cheerio": "^1.0.0-rc.10",
     "dayjs": "^1.10.7",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.1",

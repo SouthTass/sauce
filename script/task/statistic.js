@@ -2,7 +2,7 @@ let statistic = {}
 const axios = require('axios')
 const dayjs = require('dayjs')
 
-const baseMicroUrl = 'http://101.43.217.166:3000/api/micro'
+const baseMicroUrl = 'http://localhost:3000/api/micro'
 
 // 同步大乐透中奖信息
 statistic.getDltList = async function (){
@@ -35,7 +35,7 @@ statistic.getDltList = async function (){
       for(let m = 0; m < 7; m++){
         body[`ball${m}`] = num[m]
       }
-      await axios.post('http://101.43.217.166:3000/api/micro/powerball/add', body)
+      await axios.post('http://localhost:3000/api/micro/powerball/add', body)
     }
   } catch (error) {
     console.log(error)
@@ -77,7 +77,7 @@ statistic.getBoardLadder = async function (){
     for(let m = 0; m < res.length; m++){
       await axios({
         method: 'post',
-        url: `http://101.43.217.166:3000/api/stock/board-ladder/add`,
+        url: `http://localhost:3000/api/stock/board-ladder/add`,
         data: res[m]
       })
     }

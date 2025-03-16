@@ -1,7 +1,7 @@
 let performance = {}
 const axios = require('axios')
 const dayjs = require('dayjs')
-const baseUrl = 'http://101.43.217.166:3000'
+const baseUrl = 'http://localhost:3000'
 
 // 查询业绩预告
 performance.performanceForecast = async function (){

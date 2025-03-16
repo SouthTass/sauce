@@ -26,7 +26,7 @@ task.init = function init(){
 
   // 每分钟的第一秒执行
   schedule.scheduleJob('01 * * * * *', () => {
-    
+    // console.log('定时任务执行中')
   })
 
   // 每天执行22点执行

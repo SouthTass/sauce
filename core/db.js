@@ -11,7 +11,7 @@ const sequelize = new SequeLize(dbname, user, pwd, {
   dialect: 'mysql',
   host,
   port,
-  logging: false,
+  logging: true,
   timezone: '+08:00',
   pool: {
     max: 50,

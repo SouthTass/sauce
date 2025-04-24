@@ -56,7 +56,8 @@ async function getDealPosition(date, variety, contract){
  * @param { string } list         持仓数据
  */
 function getSearDetail(data, list, type){
-  let res = data.slice(0, 5)
+  // let res = data.slice(0, 5)
+  let res = data
   let moreChange = 0
   let moreChangeLength = 0
   let moreChangeWeight = 0
@@ -89,16 +90,36 @@ function getSearDetail(data, list, type){
       e.f019n = 0
     }
   })
-  res.map(e => {
+
+  let moreListTmp = res.filter(e => {
+    return e.f013n != 0 && Number(e.day_profit) > 0
+  })
+  let emptyListTmp = res.filter(e => {
+    return e.f019n != 0 && Number(e.day_profit) > 0
+  })
+  let moreList = moreListTmp.slice(0, 6)
+  let emptyList = emptyListTmp.slice(0, 6)
+  moreList.map(e => {
     moreChange += Number(e.f013n)
     moreChangeWeight += Math.ceil(Number(e.f013n) * Number(e.day_profit) / 100000000)
+  })
+  emptyList.map(e => {
     emptyChange += e.f019n
     emptyChangeWeight += Math.ceil(Number(e.f019n) * Number(e.day_profit) / 100000000)
   })
 
   if(type == 1){
-    console.log(res, moreChangeLength, emptyChangeLength)
+    console.log('res', res.slice(0, 20))
+    console.log('moreList', moreList)
+    console.log('emptyList', emptyList)
   }
+
+  // res.map(e => {
+  //   moreChange += Number(e.f013n)
+  //   moreChangeWeight += Math.ceil(Number(e.f013n) * Number(e.day_profit) / 100000000)
+  //   emptyChange += e.f019n
+  //   emptyChangeWeight += Math.ceil(Number(e.f019n) * Number(e.day_profit) / 100000000)
+  // })
 
   return `多头：${moreChange}，空头：${emptyChange}\n计算权重后\n多头：${Math.ceil(moreChangeWeight / moreChangeLength)}，空头：${Math.ceil(emptyChangeWeight / emptyChangeLength)}`
 }

@@ -26,41 +26,19 @@ class MainFunction extends Model {
 
   static async getItem(params){
     try {
-      let res = await MainFunction.findAll(params)
+      let res = await MainFunction.findAll({
+        where: {
+          user_name: params.user_name
+        },
+        order: [
+          [ 'created_at', 'DESC' ]
+        ],
+      })
       if(res) return res
     } catch (error) {
       return `${error.name} - ${error.parent.sqlMessage}`
     }
   }
-
-  
-  // static async updateItem(body){
-  //   try {
-  //     let obj = await Main.findOne({
-  //       where: {
-  //         wx_id: body.wx_id,
-  //         wx_room_id: body.wx_room_id,
-  //         key_word: body.key_word
-  //       }
-  //     })
-  //     if(obj){
-  //       let res = await Main.update({ content: body.content }, {
-  //         where: {
-  //           wx_id: body.wx_id,
-  //           wx_room_id: body.wx_room_id,
-  //           key_word: body.key_word
-  //         }
-  //       })
-  //       if(res) return res
-  //     }else{
-  //       let res = await Main.create(body)
-  //       if(res) return res
-  //     }
-  //   } catch (error) {
-  //     return `${error.name} - ${error.parent.sqlMessage}`
-  //   }
-  // }
-  
 }
 
 MainFunction.init({

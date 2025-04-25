@@ -28,7 +28,7 @@ class MainFunction extends Model {
     try {
       let res = await MainFunction.findAll({
         where: {
-          user_name: params.user_name
+          user_name: params.user_name + ''
         },
         order: [
           [ 'created_at', 'DESC' ]

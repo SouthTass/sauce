@@ -26,13 +26,14 @@ class MainFunction extends Model {
 
   static async getItem(params){
     try {
+      console.log(params.user_name)
       let res = await MainFunction.findAll({
         where: {
           user_name: params.user_name + ''
         },
         order: [
           [ 'created_at', 'DESC' ]
-        ],
+        ]
       })
       if(res) return res
     } catch (error) {

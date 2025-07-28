@@ -1,25 +1,32 @@
-async function forwardMessageToParticularUserAndGroup(message, text, bot){
-  let checkUserList = [
-    { name: '山顶动人', id: 'out-man1992'},
-    { name: '远大师', id: 'wxid_y9sdsrm8yw9a22'},
-    { name: 'mary姐', id: 'wxid_91mpeutpvaeh12'},
-    { name: '一梦', id: 'zhangming6877'},
-    { name: '期货', id: '25984984104824210@openim'}]
+const axios = require('axios')
 
-  let keywordsList = ['碳酸锂', '鸡蛋', '苯乙烯', '豆油', '油脂']
-  let sendUserList = ['woxinfeixiangdeg']
 
-  let userIndex = 3
+// 鸡蛋今日价格
+async function eggTodayPrice(msg){
+  let html = await axios.get('https://m1.100ppi.com/vane/1049-%E9%B8%A1%E8%9B%8B.html')
 
-  for(let i = 0; i < sendUserList.length; i++){
-    if(checkUserList[userIndex].name == '期货'){
-      if(keywordsList.some(e => text.includes(e))) {
-        console.log(1)
-      }
-    }else{
-      console.log(2)
-    }
-  }
+  let $ = cheerio.load(html.data)
+  let list = $('.zs-wencon table tbody tr')
+  $(list).each((index, data) => {
+    let tr = $(data)
+    console.log(tr.text())
+    // let td = $(data)
+    // let a = td.find('a').text()
+    // if(a == '鸡蛋'){
+    //   td.children().each((bIndex, b) => {
+    //     let btmp = $(b).text()
+    //     if(bIndex == 2) beforeYesterday = (btmp / 2).toFixed(2)
+    //     if(bIndex == 3) yesterday = (btmp / 2).toFixed(2)
+    //     if(bIndex == 4){
+    //       if(btmp == '-'){
+    //         msg.say(`鸡蛋前天价格：${beforeYesterday}元\n鸡蛋昨日价格：${yesterday}元\n鸡蛋今日价格：未出`)
+    //       }else{
+    //         msg.say(`鸡蛋前天价格：${beforeYesterday}元\n鸡蛋昨日价格：${yesterday}元\n鸡蛋今日价格：${(btmp / 2).toFixed(2)}元`)
+    //       }
+    //     }
+    //   })
+    // }
+  })
 }
 
-forwardMessageToParticularUserAndGroup({}, '碳酸的价格', {})
+eggTodayPrice()

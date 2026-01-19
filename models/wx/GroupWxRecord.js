@@ -38,6 +38,23 @@ class GroupWxRecord extends Model {
     return list
   }
 
+  static async getChatRecordAes(params){
+    let where = {
+      created_at: {
+        [Op.between]: [params.start_time, params.end_time]
+      },
+      ...params
+    }
+    delete where.start_time
+    delete where.end_time
+    let list = await GroupWxRecord.findAll({
+      where,
+      order: [[ 'created_at' ]]
+    })
+    if(!list) throw new global.customError.ServiceError('暂无记录')
+    return list
+  }
+
   static async getChatUser(room){
     let list = await GroupWxRecord.findAll({
       where: {

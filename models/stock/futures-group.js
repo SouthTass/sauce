@@ -1,3 +1,4 @@
+const { param } = require('../../app/stock/FuturesGroup')
 const { sequelize } = require('../../core/db')
 const { Sequelize, Model, where } = require('sequelize')
 
@@ -26,7 +27,6 @@ class MainFunction extends Model {
 
   static async getItem(params){
     try {
-      console.log(params.user_name)
       let res = await MainFunction.findAll({
         where: {
           user_name: params.user_name + ''

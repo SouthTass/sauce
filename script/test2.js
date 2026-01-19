@@ -1,6 +1,10 @@
 const xlsx = require("node-xlsx")
 const fs = require("fs")
 const axios = require('axios')
+const dayjs = require('dayjs')
+const isBetween = require('dayjs/plugin/isBetween')
+dayjs.extend(isBetween)
+const today = dayjs().format('YYYY-MM-DD')
 
 
 const getList = async () => {
@@ -9,26 +13,15 @@ const getList = async () => {
 }
 
 const exportFiles = async () => {
-  let res = await getList()
-  let list = [{
-    name: 'sheet',
-    data: []
-  }]
-  for(let i = 0; i < res.length; i++){
-    list[0].data[i] = []
-    list[0].data[i].push(res[i].name)
-    list[0].data[i].push(res[i].tel)
-    list[0].data[i].push(res[i].address)
+  let nowWeek = dayjs().day()
+  console.log(nowWeek)
+  if(dayjs().isBetween(`${today} 09:00:00`, `${today} 18:00:00`) || dayjs().isBetween(`${today} 21:00:00`, `${today} 23:00:00`)){
+    console.log(1)
+  }else{
+    console.log(2)
   }
-
-  const buffer = xlsx.build(list)
-  fs.writeFile("testFile.xlsx", buffer, function (err) {
-    if (err) {
-      console.log(err, "保存excel出错");
-    } else {
-      console.log("写入excel成功!!!");
-    }
-  })
 }
 
-exportFiles()
+setInterval(() => {
+  exportFiles()
+}, 1000);

@@ -8,8 +8,17 @@ const baseMicroUrl = 'http://localhost:3000/api/micro'
 statistic.getDltList = async function (){
   try {
     // 获取最近10条大乐透数据
-    let res = await axios.get('https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=10')
+    let res = await axios({
+      url: 'https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&isVerify=1&termLimits=10',
+      method: 'get',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'referer': 'https://www.sporttery.cn/',
+        'x-version': '1.0.0'
+      },
+    })
     if(res.status != 200) return console.log('大乐透接口出错')
+    console.log('大乐透定时任务执行成功')
     list = res.data.value.list
     
     // 获取服务器存储的大乐透列表

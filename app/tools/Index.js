@@ -14,21 +14,23 @@ router.get('/time/now', async (ctx, next) => {
 // 获取国际黄金价格
 router.get('/price/xauusd', async (ctx, next) => {
   let res = await axios({
-    url: 'https://api.jijinhao.com/sQuoteCenter/realTime.htm?code=JO_92233&_=1770013101589',
+    url: 'https://hq.sinajs.cn/?list=hf_XAU',
     method: 'get',
     headers: {
-      'User-Agent': 'JTW/6.21.0 (iPhone; iPhone11,8; 18.6; Scale/2.00)',
-      'Referer': 'https://quote.cngold.org/'
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+      'x-app-id': 'KxBcVoDHStE6CUkQ',
+      'x-version': '1.0.0',
+      'referer': 'https://finance.sina.com.cn/futures/quotes/XAU.shtml'
     }
   })
   if(res.status != 200){
     ctx.status = 200
-    ctx.body = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    ctx.body = '接口有误'
   }else{
     eval(res.data)
-    let arr = hq_str.split(',')
+    let arr = hq_str_hf_XAU.split(',')
     ctx.status = 200
-    ctx.body = arr[3]
+    ctx.body = arr[1]
   }
 })
 
